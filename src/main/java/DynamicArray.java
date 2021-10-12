@@ -1,8 +1,10 @@
+import java.util.Iterator;
+
 /**
  * Implementation of generic dynamic array data structure
  */
 @SuppressWarnings("unchecked")
-public class DynamicArray<T>
+public class DynamicArray<T> implements Iterable<T>
 {
     private T[] array;          // container
     private int length   = 0;   // current array length
@@ -49,6 +51,87 @@ public class DynamicArray<T>
         }
 
         this.array[this.length++] = item;
+    }
+
+    /**
+     * Returns index of an item in the array.
+     * Time:  O(n)
+     * Space: O(1)
+     * 
+     * @param item - item in the array.
+     * @return index of an item in the array if exists, -1 otherwise.
+     */
+    public int indexOf(T item)
+    {
+        for (int index = 0; index < this.length(); index++)
+        {
+            if (item == null) 
+            {
+                if (this.array[index] == null) return index;
+            }
+            else
+            {
+                if (item.equals(this.array[index])) return index;
+            }
+        }
+
+        return -1;
+    }
+
+    /**
+     * Removes an item from the specified index.
+     * Time:  O(n)
+     * Space: O(n)
+     * 
+     * @param index - array index.
+     * @return removed item at the specified index.
+     */
+    public T removeAt(int index)
+    {
+        if (index >= this.length || index < 0) throw new IndexOutOfBoundsException();
+
+        T data = this.array[index];
+        T[] new_array = (T[]) new Object[this.length - 1];
+        
+        for (int i = 0, j = 0; i < this.length(); i++, j++)
+        {
+            if (i == index) j--;
+            else new_array[j] = this.array[i];
+        }
+
+        this.capacity = --this.length;
+        this.array  = new_array;
+
+        return data;
+    }
+
+    /**
+     * Removes an item from an array.
+     * 
+     * @param item - item in the array.
+     * @return true if item is removed, false otherwise.
+     */
+    public boolean remove(T item)
+    {
+        int index = this.indexOf(item);
+
+        if (index == -1) return false;
+
+        this.removeAt(index);
+        return true;
+    }
+
+    /**
+     * Checks if an item exists in an array.
+     * Time:  O(n)
+     * Space: O(n)
+     * 
+     * @param item - item in the array.
+     * @return true if item exists, false otherwise.
+     */
+    public boolean contains(T item)
+    {
+        return this.indexOf(item) != -1;
     }
 
     /**
@@ -114,5 +197,50 @@ public class DynamicArray<T>
     public boolean isEmpty()
     {
         return this.length == 0;
+    }
+
+    @Override
+    public Iterator<T> iterator() 
+    {
+        return new Iterator<T>()
+        {
+            int index = 0;
+
+            @Override
+            public boolean hasNext() 
+            {
+                return index < length();    
+            }
+
+            @Override
+            public T next() 
+            {
+                return array[index++];    
+            }
+
+            @Override
+            public void remove() 
+            {
+                throw new UnsupportedOperationException();   
+            }
+        };  
+    }
+
+    @Override
+    public String toString() 
+    {
+        if (this.length() == 0) return "[]";
+        else
+        {
+            var builder = new StringBuilder(this.length()).append("[");
+
+            for(int index = 0; index < this.length() - 1; index++)
+            {
+                builder.append(this.array[index] + ",");
+            }
+
+            builder.append(this.array[this.length() - 1] + "]");
+            return builder.toString();
+        }    
     }
 }

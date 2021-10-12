@@ -1,4 +1,7 @@
 import org.junit.jupiter.api.Test;
+
+import java.util.Iterator;
+
 import org.junit.jupiter.api.Assertions;
 
 public class DynamicArrayTest 
@@ -114,5 +117,106 @@ public class DynamicArrayTest
         Assertions.assertThrows(IndexOutOfBoundsException.class, () -> {
             array.set(5, "Dota2");
         });
+    }
+
+    @Test
+    public void testClear()
+    {
+        var array = new DynamicArray<String>();
+        String[] data = {"ABC", "DEF", "GHI", "JKL"};
+
+        for(String item : data) array.append(item);
+
+        array.clear();
+
+        for (int index = 0; index < array.length(); index++)
+        {
+            Assertions.assertEquals(null, array.get(index));
+        }
+    }
+
+    @Test
+    public void testIndexOf()
+    {
+        var array = new DynamicArray<String>();
+        String[] data = {"ABC", "DEF", "GHI", "JKL"};
+
+        for(String item : data) array.append(item);
+
+        Assertions.assertEquals(1, array.indexOf("DEF"));
+        Assertions.assertEquals(3, array.indexOf("JKL"));
+        Assertions.assertEquals(-1, array.indexOf("Djordjije"));
+    }
+
+    @Test
+    public void testRemoteAt()
+    {
+        var array = new DynamicArray<Integer>();
+        int[] data = {10, -15, 20, -25, 35, 75, 55, -35};
+
+        for(Integer item : data) array.append(item); 
+
+        var item = array.removeAt(0);
+
+        Assertions.assertEquals(10, item);
+        Assertions.assertEquals(data.length - 1, array.length());
+        
+        item = array.removeAt(0);
+
+        Assertions.assertEquals(-15, item);
+        Assertions.assertEquals(data.length - 2, array.length());
+
+        item = array.removeAt(data.length - 3);
+
+        Assertions.assertEquals(-35, item);
+        Assertions.assertEquals(data.length - 3, array.length());
+        Assertions.assertEquals(data.length - 3, array.capacity());
+    }
+
+    @Test
+    public void testRemove()
+    {
+        var array = new DynamicArray<Integer>();
+        int[] data = {10, -15, 20, -25, 35, 75, 55, -35};
+
+        for(Integer item : data) array.append(item); 
+
+        var truth = array.remove(10);
+
+        Assertions.assertEquals(true, truth);
+        Assertions.assertEquals(data.length - 1, array.length());
+
+        truth = array.remove(100);
+
+        Assertions.assertEquals(false, truth);
+        Assertions.assertEquals(data.length - 1, array.length());
+
+        truth = array.remove(75);
+
+        Assertions.assertEquals(true, truth);
+        Assertions.assertEquals(data.length - 2, array.length());
+        Assertions.assertEquals(data.length - 2, array.capacity());
+    }
+
+    @Test
+    public void testIterator()
+    {
+        var array = new DynamicArray<Integer>();
+        int[] data = {10, -15, 20, -25, 35, 75, 55, -35};
+
+        int index = 0;
+        Iterator<Integer> iter = array.iterator();
+
+        while(iter.hasNext())
+        {
+            Assertions.assertEquals(iter.next(), data[index++]);
+        }
+
+        index = 0;
+
+        for(Integer number : array)
+        {
+            Assertions.assertEquals(number, data[index++]);
+        }
     }
 }
