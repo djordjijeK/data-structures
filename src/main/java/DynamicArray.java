@@ -107,6 +107,8 @@ public class DynamicArray<T> implements Iterable<T>
 
     /**
      * Removes an item from an array.
+     * Time:  O(n)
+     * Space: O(n)
      * 
      * @param item - item in the array.
      * @return true if item is removed, false otherwise.
@@ -124,7 +126,7 @@ public class DynamicArray<T> implements Iterable<T>
     /**
      * Checks if an item exists in an array.
      * Time:  O(n)
-     * Space: O(n)
+     * Space: O(1)
      * 
      * @param item - item in the array.
      * @return true if item exists, false otherwise.
