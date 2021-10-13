@@ -15,6 +15,8 @@ It grows its size to accommodate new elements and shrinks the size when the elem
 - `ArrayList` is not synchronized. 
 If multiple threads try to modify an `ArrayList` at the same time, then the final outcome will be non-deterministic.
 
+Introduction:
+
 ```java
 // create an ArrayList of strings
 List<String> animals = new ArrayList<>();
@@ -35,10 +37,14 @@ animals.add(2, "Elephant");
 System.out.println(animals);
 ```
 
+Output:
+
 ```
 [Lion, Tiger, Cat, Dog]
 [Lion, Tiger, Elephant, Cat, Dog]
 ```
+
+Inserting, Updating and Indexing:
 
 ```java
 // create an ArrayList of strings
@@ -72,6 +78,8 @@ topCompanies.set(4, "Walmart");
 System.out.println("Modified top companies list: " + topCompanies);
 ```
 
+Output:
+
 ```
 Is the topCompanies list empty? : true
 Here are the top 5 companies in the world
@@ -81,6 +89,8 @@ Second Best Company: Apple
 Last Company in the list: Facebook
 Modified top companies list: [Google, Apple, Microsoft, Amazon, Walmart]
 ```
+
+Removing: 
 
 ```java
 // create an ArrayList of strings and add elements to it
@@ -129,6 +139,8 @@ programmingLanguages.clear();
 System.out.println("After clear(): " + programmingLanguages);
 ```
 
+Output:
+
 ```
 Initial List: [C, C++, Java, Kotlin, Python, Perl, Ruby]
 After remove(5): [C, C++, Java, Kotlin, Python, Ruby]
@@ -137,6 +149,8 @@ After removeAll(scriptingLanguages): [C, C++, Java]
 After removing all elements that start with "C": [Java]
 After clear(): []
 ```
+
+Iterating:
 
 ```java
 // create an ArrayList of strings and add elements to it
@@ -177,6 +191,8 @@ for(int i = 0; i < tvShows.size(); i++) {
 }
 ```
 
+Output:
+
 ```
 === Iterate using forEach and lambda ===
 Breaking Bad
@@ -209,6 +225,8 @@ Friends
 Prison break
 ```
 
+Searching:
+
 ```java
 // create an ArrayList of strings and add elements to it
 List<String> names = new ArrayList<>();
@@ -232,6 +250,8 @@ System.out.println("lastIndexOf \"John\" : " + names.lastIndexOf("John"));
 System.out.println("lastIndexOf \"Bill\" : " + names.lastIndexOf("Bill"));
 ```
 
+Output:
+
 ```
 Does names array contain "Bob"? : true
 indexOf "Steve": 3
@@ -239,6 +259,8 @@ indexOf "Mark": -1
 lastIndexOf "John" : 4
 lastIndexOf "Bill" : -1
 ```
+
+Sorting Part I:
 
 ```java
 // create an ArrayList of numbers and add elements to it
@@ -257,10 +279,14 @@ Collections.sort(numbers);
 System.out.println("After : " + numbers);
 ```
 
+Output:
+
 ```
 Before : [13, 7, 18, 5, 2]
 After : [2, 5, 7, 13, 18]
 ```
+
+Sorting Part II:
 
 ```java
 // create an ArrayList of strings and add elements to it
@@ -284,6 +310,8 @@ names.sort(new Comparator<String>() {
 // names.sort((name1, name2) -> name1.compareTo(name2));
 System.out.println("Sorted Names : " + names);
 ```
+
+Output
 
 ```
 Names : [Lisa, Jennifer, Mark, David]
