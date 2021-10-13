@@ -1,7 +1,7 @@
 import java.util.Iterator;
 
 /**
- * Implementation of generic dynamic array data structure
+ * Generic dynamic array data structure implementation.
  */
 @SuppressWarnings("unchecked")
 public class DynamicArray<T> implements Iterable<T>
@@ -11,7 +11,7 @@ public class DynamicArray<T> implements Iterable<T>
     private int capacity = 0;   // array capcity
 
     /**
-     * DynamicArray Constructor.
+     * DynamicArray constructor.
      */
     public DynamicArray()
     {
@@ -19,7 +19,7 @@ public class DynamicArray<T> implements Iterable<T>
     }
 
     /**
-     * DynamicArray Constructor.
+     * DynamicArray constructor.
      * 
      * @param capacity - array capacity.
      */
@@ -32,8 +32,8 @@ public class DynamicArray<T> implements Iterable<T>
 
     /**
      * Appends a new item at the end of an array.
-     * Time:  worst-case = O(n), other O(1)
-     * Space: worst-case = O(n), other O(1)
+     * Time:  worst-case O(n), other O(1)
+     * Space: worst-case O(n), other O(1)
      * 
      * @param item - new item to be appended.
      */
@@ -118,8 +118,9 @@ public class DynamicArray<T> implements Iterable<T>
         int index = this.indexOf(item);
 
         if (index == -1) return false;
-
+        
         this.removeAt(index);
+        
         return true;
     }
 
@@ -142,7 +143,7 @@ public class DynamicArray<T> implements Iterable<T>
      * Space: O(1)
      * 
      * @param index - array index.
-     * @return item a the specified index.
+     * @return item at the specified index.
      */
     public T get(int index)
     {
