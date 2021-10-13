@@ -15,7 +15,7 @@ It grows its size to accommodate new elements and shrinks the size when the elem
 - `ArrayList` is not synchronized. 
 If multiple threads try to modify an `ArrayList` at the same time, then the final outcome will be non-deterministic.
 
-Introduction:
+a) Introduction:
 
 ```java
 // create an ArrayList of strings
@@ -44,7 +44,7 @@ Output:
 [Lion, Tiger, Elephant, Cat, Dog]
 ```
 
-Inserting, Updating and Indexing:
+b) Inserting, Updating and Indexing:
 
 ```java
 // create an ArrayList of strings
@@ -90,7 +90,7 @@ Last Company in the list: Facebook
 Modified top companies list: [Google, Apple, Microsoft, Amazon, Walmart]
 ```
 
-Removing: 
+c) Removing: 
 
 ```java
 // create an ArrayList of strings and add elements to it
@@ -150,7 +150,7 @@ After removing all elements that start with "C": [Java]
 After clear(): []
 ```
 
-Iterating:
+d) Iterating:
 
 ```java
 // create an ArrayList of strings and add elements to it
@@ -225,7 +225,7 @@ Friends
 Prison break
 ```
 
-Searching:
+e) Searching:
 
 ```java
 // create an ArrayList of strings and add elements to it
@@ -260,7 +260,7 @@ lastIndexOf "John" : 4
 lastIndexOf "Bill" : -1
 ```
 
-Sorting Part I:
+f) Sorting Part I:
 
 ```java
 // create an ArrayList of numbers and add elements to it
@@ -286,7 +286,7 @@ Before : [13, 7, 18, 5, 2]
 After : [2, 5, 7, 13, 18]
 ```
 
-Sorting Part II:
+g) Sorting Part II:
 
 ```java
 // create an ArrayList of strings and add elements to it
