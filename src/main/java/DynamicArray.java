@@ -33,8 +33,8 @@ public class DynamicArray<T> implements Iterable<T>
 
     /**
      * Appends a new item at the end of an array.
-     * Time:  worst-case O(n), other O(1)
-     * Space: worst-case O(n), other O(1)
+     * Time  Complexity: worst-case O(n), other O(1)
+     * Space Complexity: worst-case O(n), other O(1)
      * 
      * @param item - new item to be appended.
      */
@@ -56,11 +56,11 @@ public class DynamicArray<T> implements Iterable<T>
 
     /**
      * Returns index of an item in the array.
-     * Time:  O(n)
-     * Space: O(1)
+     * Time  Complexity: O(n)
+     * Space Complexity: O(1)
      * 
      * @param item - item in the array.
-     * @return index of an item in the array if exists, -1 otherwise.
+     * @return int - index of an item in the array if exists, -1 otherwise.
      */
     public int indexOf(T item)
     {
@@ -81,11 +81,11 @@ public class DynamicArray<T> implements Iterable<T>
 
     /**
      * Removes an item from the specified index.
-     * Time:  O(n)
-     * Space: O(n)
+     * Time  Complexity: O(n)
+     * Space Complexity: O(n)
      * 
      * @param index - array index.
-     * @return removed item at the specified index.
+     * @return T    - removed item at the specified index.
      */
     public T removeAt(int index)
     {
@@ -108,11 +108,11 @@ public class DynamicArray<T> implements Iterable<T>
 
     /**
      * Removes an item from an array.
-     * Time:  O(n)
-     * Space: O(n)
+     * Time  Complexity: O(n)
+     * Space Complexity: O(n)
      * 
-     * @param item - item in the array.
-     * @return true if item is removed, false otherwise.
+     * @param item     - item in the array.
+     * @return boolean - true if item is removed, false otherwise.
      */
     public boolean remove(T item)
     {
@@ -127,11 +127,11 @@ public class DynamicArray<T> implements Iterable<T>
 
     /**
      * Checks if an item exists in an array.
-     * Time:  O(n)
-     * Space: O(1)
+     * Time  Complexity: O(n)
+     * Space Complexity: O(1)
      * 
-     * @param item - item in the array.
-     * @return true if item exists, false otherwise.
+     * @param item     - item in the array.
+     * @return boolean - true if item exists, false otherwise.
      */
     public boolean contains(T item)
     {
@@ -140,11 +140,11 @@ public class DynamicArray<T> implements Iterable<T>
 
     /**
      * Returns an item at the specified index.
-     * Time:  O(1)
-     * Space: O(1)
+     * Time  Complexity: O(1)
+     * Space Complexity: O(1)
      * 
      * @param index - array index.
-     * @return item at the specified index.
+     * @return T    - item at the specified index.
      */
     public T get(int index)
     {
@@ -154,11 +154,11 @@ public class DynamicArray<T> implements Iterable<T>
 
     /**
      * Sets an itemt at the specified index.
-     * Time:  O(1)
-     * Space: O(1)
+     * Time  Complexity: O(1)
+     * Space Complexity: O(1)
      * 
      * @param index - array index.
-     * @param T - item to be set.
+     * @param T     - item to be set.
      */
     public void set(int index, T item)
     {
@@ -168,8 +168,8 @@ public class DynamicArray<T> implements Iterable<T>
 
     /**
      * Clears an array.
-     * Time:  O(n)
-     * Space: O(1)
+     * Time  Complexity: O(n)
+     * Space Complexity: O(1)
      */
     public void clear()
     {
@@ -230,6 +230,9 @@ public class DynamicArray<T> implements Iterable<T>
         };  
     }
 
+    /**
+     * DynamicArray class string representation.
+     */
     @Override
     public String toString() 
     {
