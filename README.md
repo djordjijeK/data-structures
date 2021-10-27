@@ -1,6 +1,10 @@
 # Data Structures
 
+Data structure is a collection of data values, the relationships among them, and the functions or operations that can be applied to the data.
+
 ## 1. `ArrayList` Data Structure
+
+
 
 `ArrayList` in `Java` is used to store dynamically sized collection of elements. 
 Contrary to arrays that are fixed in size, an `ArrayList` grows its size automatically when new elements are added to it.
