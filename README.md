@@ -1,10 +1,11 @@
 # Data Structures
 
-Data structure is a collection of data values, the relationships among them, and the functions or operations that can be applied to the data.
+A **data structure** is a particular way of organizing data in a computer memory so that it can be used effectively.
+In other words, it is a collection of data, the relationships among them, and the functions or operations that can be applied to the data.
 
-## 1. `ArrayList` Data Structure
+## 1. Dynamic Array - `ArrayList`
 
-
+`ArrayList` &#8594; `List`(interface) &#8594; `Collection`(interface) &#8594; `Iterable`(interface)
 
 `ArrayList` in `Java` is used to store dynamically sized collection of elements. 
 Contrary to arrays that are fixed in size, an `ArrayList` grows its size automatically when new elements are added to it.
