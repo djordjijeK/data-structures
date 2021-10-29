@@ -1,8 +1,5 @@
 import java.util.Iterator;
 
-/**
- * Generic dynamic array data structure implementation.
- */
 @SuppressWarnings("unchecked")
 public class DynamicArray<T> implements Iterable<T>
 {

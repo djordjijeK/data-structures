@@ -203,6 +203,8 @@ public class DynamicArrayTest
         var array = new DynamicArray<Integer>();
         int[] data = {10, -15, 20, -25, 35, 75, 55, -35};
 
+        for(Integer item : data) array.append(item);
+
         int index = 0;
         Iterator<Integer> iter = array.iterator();
 
@@ -211,6 +213,7 @@ public class DynamicArrayTest
             Assertions.assertEquals(iter.next(), data[index++]);
         }
 
+        Assertions.assertEquals(index, data.length);
         index = 0;
 
         for(Integer number : array)

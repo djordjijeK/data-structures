@@ -212,4 +212,45 @@ public class DoublyLinkedListTest
         Assertions.assertEquals('D', linkedList.peekFirst());
         Assertions.assertEquals('D', linkedList.peekLast());
     }
+
+    @Test
+    public void testRemove()
+    {
+        var linkedList = new DoublyLinkedList<Character>();
+
+        linkedList.append('A');
+        linkedList.append('B');
+        linkedList.append('C');
+        linkedList.append(null);
+        linkedList.append('D');
+
+        boolean result = linkedList.remove('C');
+        
+        Assertions.assertTrue(result);
+        Assertions.assertEquals(4, linkedList.length());
+        Assertions.assertEquals('A', linkedList.get(0));
+        Assertions.assertEquals('B', linkedList.get(1));
+        Assertions.assertEquals(null, linkedList.get(2));
+        Assertions.assertEquals('D', linkedList.get(3));
+
+        result = linkedList.remove('C');
+
+        Assertions.assertFalse(result);
+        Assertions.assertEquals(4, linkedList.length());
+
+        result = linkedList.remove(null);
+
+        Assertions.assertTrue(result);
+        Assertions.assertEquals(3, linkedList.length());
+        Assertions.assertEquals('A', linkedList.get(0));
+        Assertions.assertEquals('B', linkedList.get(1));
+        Assertions.assertEquals('D', linkedList.get(2));
+
+        linkedList.remove('A');
+        linkedList.remove('D');
+
+        Assertions.assertEquals(1, linkedList.length());
+        Assertions.assertEquals('B', linkedList.peekFirst());
+        Assertions.assertEquals('B', linkedList.peekLast());
+    }
 }

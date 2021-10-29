@@ -1,6 +1,3 @@
-/**
- * Generic doubly linked list data structure implementation.
- */
 public class DoublyLinkedList<T>
 {
     private int size;        // linked list size
@@ -173,10 +170,19 @@ public class DoublyLinkedList<T>
         if (index == this.length() - 1)
             return this.removeLast();
 
-        Node<T> current = this.head;
+        int i;
+        Node<T> current;
 
-        for (int i = 0; i < index - 1; i++)
-            current = current.next;
+        if (index - 1 <= this.length() / 2)
+        {
+            for(i = 0, current = this.head; i != index - 1; i++)
+                current = current.next;
+        }
+        else
+        {
+            for(i = this.length() - 1, current = this.tail; i != index - 1; i--)
+                current = current.previous;
+        }
 
         Node<T> removingNode = current.next;
 
@@ -190,18 +196,49 @@ public class DoublyLinkedList<T>
         return removingNode.key;
     }
 
-    // /**
-    //  * Removes a particular value from a linked list if exists.
-    //  * Time  Complexity: O(n)
-    //  * Space Complexity: O(1)
-    //  * 
-    //  * @param object   - an object to be removed.
-    //  * @return boolean - true if object is removed, false otherwise. 
-    //  */
-    // public boolean remove(T value)
-    // {
+    /**
+     * Removes a particular value from a linked list if exists.
+     * Time  Complexity: O(n)
+     * Space Complexity: O(1)
+     * 
+     * @param object   - an object to be removed.
+     * @return boolean - true if object is removed, false otherwise. 
+     */
+    public boolean remove(T value)
+    {
+        Node<T> current = this.head;
 
-    // }
+        if (value == null)
+        {
+            for(int index = 0; index < this.length(); index++)
+            {
+                
+                if (current.key == null)
+                {
+                    this.removeAt(index);
+                    return true;
+                }
+    
+                current = current.next;
+            }
+        }
+        else
+        {
+            for(int index = 0; index < this.length(); index++)
+            {
+                
+                if (current.key != null && current.key.equals(value))
+                {
+                    this.removeAt(index);
+                    return true;
+                }
+    
+                current = current.next;
+            }
+        }
+
+        return false;
+    }
 
     /**
      * Returns an item at the specified index.
