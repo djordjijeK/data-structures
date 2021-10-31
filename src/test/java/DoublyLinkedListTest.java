@@ -253,4 +253,24 @@ public class DoublyLinkedListTest
         Assertions.assertEquals('B', linkedList.peekFirst());
         Assertions.assertEquals('B', linkedList.peekLast());
     }
+
+    @Test
+    public void testIndexOfAndContains()
+    {
+        var linkedList = new DoublyLinkedList<Character>();
+
+        linkedList.append('A');
+        linkedList.append('B');
+        linkedList.append('C');
+        linkedList.append(null);
+        linkedList.append('D');
+
+        Assertions.assertEquals(0, linkedList.indexOf('A'));
+        Assertions.assertEquals(3, linkedList.indexOf(null));
+        Assertions.assertEquals(-1, linkedList.indexOf('E'));
+
+        Assertions.assertTrue(linkedList.contains('D'));
+        Assertions.assertFalse(linkedList.contains('F'));
+    }
+
 }

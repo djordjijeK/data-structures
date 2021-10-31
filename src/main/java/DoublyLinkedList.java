@@ -1,4 +1,6 @@
-public class DoublyLinkedList<T>
+import java.util.Iterator;
+
+public class DoublyLinkedList<T> implements Iterable<T>
 {
     private int size;        // linked list size
     private Node<T> head;    // head of a linked list
@@ -197,6 +199,52 @@ public class DoublyLinkedList<T>
     }
 
     /**
+     * Finds an index of a particular value in a linked list.
+     * Time  Complexity: O(n)
+     * Space Complexity: O(1)
+     * 
+     * @param item  - item to search for. 
+     * @return int  - index of an item in the list if exists, -1 otherwise.
+     */
+    public int indexOf(T item)
+    {
+        int index = 0;
+        Node<T> current = this.head;
+
+        if (item == null)
+        {
+            for(; current != null; current = current.next, index++)
+            {
+                if (current.key == null)
+                    return index;
+            }
+        }
+        else
+        {
+            for(; current != null; current = current.next, index++)
+            {
+                if (item.equals(current.key))
+                    return index;
+            } 
+        }
+
+        return -1;
+    }
+
+    /**
+     * Checks if an item exists in a linked list.
+     * Time  Complexity: O(n)
+     * Space Complexity: O(1)
+     * 
+     * @param item     - item to search for. 
+     * @return boolean - true if an item exists in a linked list, false otherwise.
+     */
+    public boolean contains(T item)
+    {
+        return this.indexOf(item) != -1;
+    }
+
+    /**
      * Removes a particular value from a linked list if exists.
      * Time  Complexity: O(n)
      * Space Complexity: O(1)
@@ -343,5 +391,60 @@ public class DoublyLinkedList<T>
     public boolean isEmpty()
     {
         return this.length() == 0;
+    }
+
+    @Override
+    public Iterator<T> iterator() 
+    {
+        return new Iterator<T>()
+        {
+            private Node<T> current = DoublyLinkedList.this.head;
+
+            @Override
+            public boolean hasNext() 
+            {
+                return current != null;
+            }
+
+            @Override
+            public T next() 
+            {
+                T data  = current.key;
+                current = current.next;
+                
+                return data;
+            }
+
+            @Override
+            public void remove() 
+            {
+                throw new UnsupportedOperationException(); 
+            }
+        };   
+    }
+
+    @Override
+    public String toString() 
+    {
+        StringBuilder stringRepresentation = new StringBuilder();
+        stringRepresentation.append("[");
+
+        Node<T> current = this.head;
+
+        while (current != null)
+        {
+            stringRepresentation.append(current.key);
+
+            if (current.next != null)
+            {
+                stringRepresentation.append(", ");
+            }
+
+            current = current.next;
+        }
+
+        stringRepresentation.append("]");
+        
+        return stringRepresentation.toString();
     }
 }
