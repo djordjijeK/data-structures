@@ -178,7 +178,7 @@ while (tvShowIterator.hasNext()) {
 }
 
 System.out.println("\n=== Iterate using a listIterator() to traverse in both directions ===");
-// here, we start from the end of the list and traverse backwards.
+// here, we start from the end of the list and traverse backwards
 ListIterator<String> tvShowListIterator = tvShows.listIterator(tvShows.size());
 while (tvShowListIterator.hasPrevious()) {
     String tvShow = tvShowListIterator.previous();
@@ -303,7 +303,7 @@ names.add("David");
 
 System.out.println("Names : " + names);
 
-// sort an ArrayList using its sort() method. You must pass a Comparator to the ArrayList.sort() method.
+// sort an ArrayList using its sort() method. You must pass a Comparator to the ArrayList.sort() method
 names.sort(new Comparator<String>() {
     @Override
     public int compare(String name1, String name2) {
@@ -316,7 +316,7 @@ names.sort(new Comparator<String>() {
 System.out.println("Sorted Names : " + names);
 ```
 
-Output
+Output:
 
 ```
 Names : [Lisa, Jennifer, Mark, David]
@@ -324,3 +324,287 @@ Sorted Names : [David, Jennifer, Lisa, Mark]
 ```
 
 **Note**: One plausible implementation of generic dynamic array data structure can be found @[DynamicArray](src/main/java/DynamicArray.java).
+
+## 2. Linked List - `LinkedList`
+
+`LinkedList` &#8594; `List`(interface), [`Deque`(interface) &#8594; `Queue`(interface)] &#8594; `Collection`(interface) &#8594; `Iterable`(interface)
+
+`LinkedList` in `Java` is implemented as a doubly linked list.
+
+- `LinkedList` maintains the insertion order of the elements.
+
+- `LinkedList` can have duplicate and null values. 
+
+- `LinkedList` is not thread-safe. You must explicitly synchronize concurrent modifications to the `LinkedList` in a multi-threaded environment.
+
+An `ArrayList` stores the elements sequentially based on their index. 
+However, a `LinkedList` uses a doubly-linked list to store its elements.
+You can access an element in an `ArrayList` in `O(1)` time. 
+But it takes `O(n)` time to access an element in a `LinkedList` because it needs to traverse to the desired element by following the `next/prev` references.
+
+![Array vs LinkedList](https://www.callicoder.com/static/ffb4ab89e6cfc7e840b8da297b169550/ea544/java-linkedlist-vs-arraylist.jpg)
+
+a) Introduction:
+
+```java
+// creating a LinkedList
+LinkedList<String> friends = new LinkedList<>();
+
+// adding new elements to the end of the LinkedList using add() method
+friends.add("Rajeev");
+friends.add("John");
+friends.add("David");
+friends.add("Chris");
+
+System.out.println("Initial LinkedList : " + friends);
+
+// adding an element at the specified position in the LinkedList
+friends.add(3, "Lisa");
+System.out.println("After add(3, \"Lisa\") : " + friends);
+
+// adding an element at the beginning of the LinkedList
+friends.addFirst("Steve");
+System.out.println("After addFirst(\"Steve\") : " + friends);
+
+// adding an element at the end of the LinkedList (this method is equivalent to the add() method)
+friends.addLast("Jennifer");
+System.out.println("After addLast(\"Jennifer\") : " + friends);
+
+// adding all the elements from an existing collection to the end of the LinkedList
+List<String> familyFriends = new ArrayList<>();
+familyFriends.add("Jesse");
+familyFriends.add("Walt");
+
+friends.addAll(familyFriends);
+System.out.println("After addAll(familyFriends) : " + friends);
+```
+
+Output:
+
+```
+Initial LinkedList : [Rajeev, John, David, Chris]
+After add(3, "Lisa") : [Rajeev, John, David, Lisa, Chris]
+After addFirst("Steve") : [Steve, Rajeev, John, David, Lisa, Chris]
+After addLast("Jennifer") : [Steve, Rajeev, John, David, Lisa, Chris, Jennifer]
+After addAll(familyFriends) : [Steve, Rajeev, John, David, Lisa, Chris, Jennifer, Jesse, Walt]
+```
+
+b) Inserting and Indexing:
+
+```java
+// a LinkedList containing stock prices of a company for the last 6 days
+LinkedList<Double> stockPrices = new LinkedList<>();
+
+// inserting new elements to the end of the LinkedList using add() method
+stockPrices.add(45.00);
+stockPrices.add(1, 51.00);
+stockPrices.add(62.50);
+stockPrices.add(42.75);
+stockPrices.add(36.80);
+stockPrices.add(5, 68.40);
+
+// getting the first element in the LinkedList using getFirst()
+// the getFirst() method throws NoSuchElementException if the LinkedList is empty
+Double firstElement = stockPrices.getFirst();
+System.out.println("Initial Stock Price : " + firstElement);
+
+// getting the last element in the LinkedList using getLast()
+// the getLast() method throws NoSuchElementException if the LinkedList is empty
+Double lastElement = stockPrices.getLast();
+System.out.println("Current Stock Price : " + lastElement);
+
+// getting the element at a given position in the LinkedList
+Double stockPriceOn3rdDay = stockPrices.get(2);
+System.out.println("Stock Price on 3rd Day : " + stockPriceOn3rdDay);
+```
+
+Output:
+
+```
+Initial Stock Price : 45.0
+Current Stock Price : 68.4
+Stock Price on 3rd Day : 62.5
+```
+
+c) Removing:
+
+```java
+LinkedList<String> programmingLanguages = new LinkedList<>();
+
+programmingLanguages.add("Assembly");
+programmingLanguages.add("Fortran");
+programmingLanguages.add("Pascal");
+programmingLanguages.add("C");
+programmingLanguages.add("C++");
+programmingLanguages.add("Java");
+programmingLanguages.add("C#");
+programmingLanguages.add("Kotlin");
+
+System.out.println("Initial LinkedList = " + programmingLanguages);
+
+// remove the first element in the LinkedList
+// throws NoSuchElementException if the LinkedList is empty
+String element = programmingLanguages.removeFirst();
+System.out.println("Removed the first element " + element + " => " + programmingLanguages);
+
+// remove the last element in the LinkedList
+// throws NoSuchElementException if the LinkedList is empty
+element = programmingLanguages.removeLast();
+System.out.println("Removed the last element " + element + " => " + programmingLanguages);
+
+// remove the first occurrence of the specified element from the LinkedList
+boolean isRemoved = programmingLanguages.remove("C#");
+if(isRemoved) 
+{
+    System.out.println("Removed C# => " + programmingLanguages);
+}
+
+// remove all the elements that satisfy the given predicate
+programmingLanguages.removeIf(programmingLanguage -> programmingLanguage.startsWith("C"));
+System.out.println("Removed elements starting with C => " + programmingLanguages);
+
+// clear the LinkedList by removing all elements
+programmingLanguages.clear();
+System.out.println("Cleared the LinkedList => " + programmingLanguages);
+```
+
+Output:
+
+```
+Initial LinkedList = [Assembly, Fortran, Pascal, C, C++, Java, C#, Kotlin]
+Removed the first element Assembly => [Fortran, Pascal, C, C++, Java, C#, Kotlin]
+Removed the last element Kotlin => [Fortran, Pascal, C, C++, Java, C#]
+Removed C# => [Fortran, Pascal, C, C++, Java]
+Removed elements starting with C => [Fortran, Pascal, Java]
+Cleared the LinkedList => []
+```
+
+d) Iterating:
+
+```java
+LinkedList<String> humanSpecies = new LinkedList<>();
+
+humanSpecies.add("Homo Sapiens");
+humanSpecies.add("Homo Neanderthalensis");
+humanSpecies.add("Homo Erectus");
+humanSpecies.add("Home Habilis");
+
+System.out.println("=== Iterate over a LinkedList using Java forEach and lambda ===");
+humanSpecies.forEach(name -> {
+    System.out.println(name);
+});
+
+System.out.println("\n=== Iterate over a LinkedList using iterator() ===");
+Iterator<String> humanSpeciesIterator = humanSpecies.iterator();
+while (humanSpeciesIterator.hasNext()) {
+    String speciesName = humanSpeciesIterator.next();
+    System.out.println(speciesName);
+}
+
+System.out.println("\n=== Iterate over a LinkedList using iterator() and Java forEachRemaining() method ===");
+humanSpeciesIterator = humanSpecies.iterator();
+humanSpeciesIterator.forEachRemaining(speciesName -> {
+    System.out.println(speciesName);
+});
+
+System.out.println("\n=== Iterate over a LinkedList using descendingIterator() ===");
+Iterator<String> descendingHumanSpeciesIterator = humanSpecies.descendingIterator();
+while (descendingHumanSpeciesIterator.hasNext()) {
+    String speciesName = descendingHumanSpeciesIterator.next();
+    System.out.println(speciesName);
+}
+
+
+System.out.println("\n=== Iterate over a LinkedList using listIterator() ===");
+// ListIterator can be used to iterate over the LinkedList in both forward and backward directions
+// in this example, we start from the end of the list and traverse backwards
+ListIterator<String> humanSpeciesListIterator = humanSpecies.listIterator(humanSpecies.size());
+while (humanSpeciesListIterator.hasPrevious()) {
+    String speciesName = humanSpeciesListIterator.previous();
+    System.out.println(speciesName);
+}
+
+System.out.println("\n=== Iterate over a LinkedList using simple for-each loop ===");
+for(String speciesName: humanSpecies) {
+    System.out.println(speciesName);
+}
+```
+
+Output:
+
+```
+=== Iterate over a LinkedList using Java forEach and lambda ===
+Homo Sapiens
+Homo Neanderthalensis
+Homo Erectus
+Home Habilis
+
+=== Iterate over a LinkedList using iterator() ===
+Homo Sapiens
+Homo Neanderthalensis
+Homo Erectus
+Home Habilis
+
+=== Iterate over a LinkedList using iterator() and Java 8 forEachRemaining() method ===
+Homo Sapiens
+Homo Neanderthalensis
+Homo Erectus
+Home Habilis
+
+=== Iterate over a LinkedList using descendingIterator() ===
+Home Habilis
+Homo Erectus
+Homo Neanderthalensis
+Homo Sapiens
+
+=== Iterate over a LinkedList using listIterator() ===
+Home Habilis
+Homo Erectus
+Homo Neanderthalensis
+Homo Sapiens
+
+=== Iterate over a LinkedList using simple for-each loop ===
+Homo Sapiens
+Homo Neanderthalensis
+Homo Erectus
+Home Habilis
+```
+
+
+e) Searching:
+
+```java
+LinkedList<String> employees = new LinkedList<>();
+
+employees.add("John");
+employees.add("David");
+employees.add("Lara");
+employees.add("Chris");
+employees.add("Steve");
+employees.add("David");
+
+// check if the LinkedList contains an element
+System.out.println("Does Employees LinkedList contain \"Lara\"? : " + employees.contains("Lara"));
+
+// find the index of the first occurrence of an element in the LinkedList
+System.out.println("indexOf \"Steve\" : " + employees.indexOf("Steve"));
+System.out.println("indexOf \"Mark\" : " + employees.indexOf("Mark"));
+
+// find the index of the last occurrence of an element in the LinkedList
+System.out.println("lastIndexOf \"David\" : " + employees.lastIndexOf("David"));
+System.out.println("lastIndexOf \"Bob\" : " + employees.lastIndexOf("Bob"));
+```
+
+Output:
+
+```
+Does Employees LinkedList contain "Lara"? : true
+indexOf "Steve" : 4
+indexOf "Mark" : -1
+lastIndexOf "David" : 5
+lastIndexOf "Bob" : -1
+```
+
+
+
+**Note**: One plausible implementation of a generic doubly linked list data structure can be found @[DoublyLinkedList](src/main/java/DoublyLinkedList.java)
