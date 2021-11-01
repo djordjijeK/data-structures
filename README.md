@@ -700,7 +700,7 @@ Just like queues in real life, new elements in a `Queue` data structure are adde
 a) Basic Operations:
 
 A `Queue` in `Java` is just an interface. 
-We need a concrete implementation of the Queue interface to work with, in our programs.
+We need a concrete implementation of the `Queue` interface to work with, in our programs.
 
 ```java
 // create and initialize a Queue using a LinkedList
