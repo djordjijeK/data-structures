@@ -605,6 +605,177 @@ lastIndexOf "David" : 5
 lastIndexOf "Bob" : -1
 ```
 
-
-
 **Note**: One plausible implementation of a generic doubly linked list data structure can be found @[DoublyLinkedList](src/main/java/DoublyLinkedList.java)
+
+## 3. Stack - `Stack`
+
+`Stack` &#8594; `Vector` &#8594; `List`(interface) &#8594; `Collection`(interface) &#8594; `Iterable`(interface)
+
+A `Stack` is a Last In First Out (LIFO) data structure. 
+It supports two basic operations called `push` and `pop`. 
+The `push` operation adds an element at the top of the stack, and the `pop` operation removes an element from the top of the stack.
+
+a) Basic Operations:
+
+```java
+// creating a Stack
+Stack<String> stackOfCards = new Stack<>();
+
+// pushing new items to the Stack
+stackOfCards.push("Jack");
+stackOfCards.push("Queen");
+stackOfCards.push("King");
+stackOfCards.push("Ace");
+
+System.out.println("Stack => " + stackOfCards);
+System.out.println();
+
+// popping items from the Stack
+String cardAtTop = stackOfCards.pop();  // throws EmptyStackException if the stack is empty
+System.out.println("Stack.pop() => " + cardAtTop);
+System.out.println("Current Stack => " + stackOfCards);
+System.out.println();
+
+// get the item at the top of the stack without removing it
+cardAtTop = stackOfCards.peek();
+System.out.println("Stack.peek() => " + cardAtTop);
+System.out.println("Current Stack => " + stackOfCards);
+```
+
+```
+Stack => [Jack, Queen, King, Ace]
+Stack.pop() => Ace
+Current Stack => [Jack, Queen, King]
+Stack.peek() => King
+Current Stack => [Jack, Queen, King]
+```
+
+b) Other Operations:
+
+```java
+Stack<String> stackOfCards = new Stack<>();
+
+stackOfCards.push("Jack");
+stackOfCards.push("Queen");
+stackOfCards.push("King");
+stackOfCards.push("Ace");
+
+System.out.println("Stack : " + stackOfCards);
+
+// check if the Stack is empty
+System.out.println("Is Stack empty? : " + stackOfCards.isEmpty());
+
+// find the size of Stack
+System.out.println("Size of Stack : " + stackOfCards.size());
+
+// search for an element
+// the search() method returns the 1-based position of the element from the top of the stack
+// it returns -1 if the element was not found in the stack
+int position = stackOfCards.search("Queen");
+
+if(position != -1) {
+    System.out.println("Found the element \"Queen\" at position : " + position);
+} else {
+    System.out.println("Element not found");
+}
+```
+
+```
+Stack : [Jack, Queen, King, Ace]
+Is Stack empty? : false
+Size of Stack : 4
+Found the element "Queen" at position : 3
+```
+
+**Note**: One plausible implementation of a generic stack data structure can be found @[Stack](src/main/java/Stack.java)
+
+## 4. Queue - `Queue`
+
+`Queue`(Interface) &#8594; `Collection`(interface) &#8594; `Iterable`(interface)
+
+A `Queue` is a First In First Out (FIFO) data structure. 
+It models a queue in real-life.
+Just like queues in real life, new elements in a `Queue` data structure are added at the back and removed from the front.
+
+a) Basic Operations:
+
+A `Queue` in `Java` is just an interface. 
+We need a concrete implementation of the Queue interface to work with, in our programs.
+
+```java
+// create and initialize a Queue using a LinkedList
+Queue<String> waitingQueue = new LinkedList<>();
+
+// adding new elements to the Queue (The Enqueue operation)
+waitingQueue.add("Petar");
+waitingQueue.add("Chris");
+waitingQueue.add("John");
+waitingQueue.add("Mark");
+waitingQueue.add("Steven");
+
+System.out.println("WaitingQueue : " + waitingQueue);
+
+// removing an element from the Queue using remove() (the dequeue operation)
+// the remove() method throws NoSuchElementException if the Queue is empty
+String name = waitingQueue.remove();
+System.out.println("Removed from WaitingQueue : " + name + " | New WaitingQueue : " + waitingQueue);
+
+// removing an element from the Queue using poll()
+// the poll() method is similar to remove() except that it returns null if the Queue is empty.
+name = waitingQueue.poll();
+System.out.println("Removed from WaitingQueue : " + name + " | New WaitingQueue : " + waitingQueue);
+```
+
+```
+WaitingQueue : [Petar, Chris, John, Mark, Steven]
+Removed from WaitingQueue : Petar | New WaitingQueue : [Chris, John, Mark, Steven]
+Removed from WaitingQueue : Chris | New WaitingQueue : [John, Mark, Steven]
+```
+
+b) Other Operations:
+
+```java
+Queue<String> waitingQueue = new LinkedList<>();
+
+waitingQueue.add("Jennifer");
+waitingQueue.add("Angelina");
+waitingQueue.add("Johnny");
+waitingQueue.add("Sachin");
+
+System.out.println("WaitingQueue : " + waitingQueue);
+
+// check if a Queue is empty
+System.out.println("is waitingQueue empty? : " + waitingQueue.isEmpty());
+
+// find the size of the Queue
+System.out.println("Size of waitingQueue : " + waitingQueue.size());
+
+// check if the Queue contains an element
+String name = "Johnny";
+if(waitingQueue.contains(name)) {
+    System.out.println("WaitingQueue contains " + name);
+} else {
+    System.out.println("Waiting Queue doesn't contain " + name);
+}
+
+// get the element at the front of the Queue without removing it using element()
+// the element() method throws NoSuchElementException if the Queue is empty
+String firstPersonInTheWaitingQueue =  waitingQueue.element();
+System.out.println("First Person in the Waiting Queue (element()) : " + firstPersonInTheWaitingQueue);
+
+// get the element at the front of the Queue without removing it using peek()
+// the peek() method is similar to element() except that it returns null if the Queue is empty
+firstPersonInTheWaitingQueue = waitingQueue.peek();
+System.out.println("First Person in the Waiting Queue : " + firstPersonInTheWaitingQueue);
+```
+
+```
+WaitingQueue : [Jennifer, Angelina, Johnny, Sachin]
+is waitingQueue empty? : false
+Size of waitingQueue : 4
+WaitingQueue contains Johnny
+First Person in the Waiting Queue (element()) : Jennifer
+First Person in the Waiting Queue : Jennifer
+```
+
+**Note**: One plausible implementation of a generic queue data structure can be found @[Queue](src/main/java/Queue.java)
