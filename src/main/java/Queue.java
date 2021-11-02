@@ -2,7 +2,7 @@ import java.util.Iterator;
 
 public class Queue<T> implements Iterable<T>
 {
-    private DoublyLinkedList<T> queue;
+    private DoublyLinkedList<T> queue;    // linked list used in a queue manner.
     
     /**
      * Queue constructor.

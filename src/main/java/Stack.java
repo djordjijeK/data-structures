@@ -3,7 +3,7 @@ import java.util.EmptyStackException;
 
 public class Stack<T> implements Iterable<T>
 {
-    private DoublyLinkedList<T> stack;
+    private DoublyLinkedList<T> stack;    // linked list used in a stack manner.
     
     /**
      * Stack constructor.

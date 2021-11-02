@@ -30,6 +30,7 @@ public class DynamicArrayTest
     {
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             var array = new DynamicArray<Integer>(-10);
+            array.append(10);
         });
     }
 

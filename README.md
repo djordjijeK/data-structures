@@ -779,3 +779,5 @@ First Person in the Waiting Queue : Jennifer
 ```
 
 **Note**: One plausible implementation of a generic queue data structure can be found @[Queue](src/main/java/Queue.java)
+
+## 5. Hash Table - `HashTable`
