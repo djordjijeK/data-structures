@@ -124,7 +124,7 @@ public class DoublyLinkedList<T> implements Iterable<T>
      * @param index - an index to insert a new item. 
      * @param item  - new item to be inserted.
      */
-    public void insertAt(int index, T item) throws IndexOutOfBoundsException
+    public void insertAt(int index, T item)
     {
         if (index < 0 || index > this.length())
             throw new IndexOutOfBoundsException();
@@ -146,9 +146,9 @@ public class DoublyLinkedList<T> implements Iterable<T>
         for (int i = 0; i < index - 1; i++)
             temp = temp.next;
 
-        Node<T> newNode = new Node<T>(item, temp, temp.next);
+        Node<T> newNode    = new Node<T>(item, temp, temp.next);
         temp.next.previous = newNode;
-        temp.next = newNode;
+        temp.next          = newNode;
 
         this.size++;
     }
@@ -161,7 +161,7 @@ public class DoublyLinkedList<T> implements Iterable<T>
      * @param index - an index to remove an item. 
      * @return T    - an item at the specified index.
      */
-    public T removeAt(int index) throws IndexOutOfBoundsException
+    public T removeAt(int index)
     {
         if (index < 0 || index >= this.length())
             throw new IndexOutOfBoundsException();
@@ -296,7 +296,7 @@ public class DoublyLinkedList<T> implements Iterable<T>
      * @param index - item's index.
      * @return T    - an item at the specified index.
      */
-    public T get(int index) throws IndexOutOfBoundsException
+    public T get(int index)
     {
         if (index < 0 || index > this.length())
             throw new IndexOutOfBoundsException();
@@ -318,7 +318,9 @@ public class DoublyLinkedList<T> implements Iterable<T>
      */
     public T peekFirst()
     {
-        if (this.isEmpty()) throw new RuntimeException("Linked list is empty!");
+        if (this.isEmpty()) 
+            throw new RuntimeException("Linked list is empty!");
+
         return this.head.key;
     }
 
@@ -331,14 +333,17 @@ public class DoublyLinkedList<T> implements Iterable<T>
      */
     public T removeFirst()
     {
-        if (this.isEmpty()) throw new RuntimeException("Linked list is empty!");
+        if (this.isEmpty()) 
+            throw new RuntimeException("Linked list is empty!");
 
         T key     = this.head.key;
         this.head = this.head.next;
         this.size = this.size - 1;
 
-        if (this.isEmpty()) this.tail = null;
-        else this.head.previous = null;
+        if (this.isEmpty()) 
+            this.tail = null;
+        else 
+            this.head.previous = null;
 
         return key;
     }
@@ -352,7 +357,9 @@ public class DoublyLinkedList<T> implements Iterable<T>
      */
     public T peekLast()
     {
-        if (this.isEmpty()) throw new RuntimeException("Linked list is empty!");
+        if (this.isEmpty()) 
+            throw new RuntimeException("Linked list is empty!");
+
         return this.tail.key;
     }
 
@@ -365,14 +372,17 @@ public class DoublyLinkedList<T> implements Iterable<T>
      */
     public T removeLast()
     {
-        if (this.isEmpty()) throw new RuntimeException("Linked list is empty!");
+        if (this.isEmpty()) 
+            throw new RuntimeException("Linked list is empty!");
 
         T key     = this.tail.key;
         this.tail = this.tail.previous;
         this.size = this.size - 1;
 
-        if (this.isEmpty()) this.head = null;
-        else this.tail.next = null;
+        if (this.isEmpty()) 
+            this.head = null;
+        else 
+            this.tail.next = null;
 
         return key;
     }
@@ -398,7 +408,7 @@ public class DoublyLinkedList<T> implements Iterable<T>
     {
         return new Iterator<T>()
         {
-            private Node<T> current = DoublyLinkedList.this.head;
+            private Node<T> current = head;
 
             @Override
             public boolean hasNext() 

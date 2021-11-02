@@ -22,7 +22,8 @@ public class DynamicArray<T> implements Iterable<T>
      */
     public DynamicArray(int capacity)
     {
-        if (capacity < 0) throw new IllegalArgumentException("Illegal Capacity: " + capacity);
+        if (capacity < 0) 
+            throw new IllegalArgumentException("Illegal Capacity: " + capacity);
         
         this.capacity = capacity;
         this.array    = (T[]) new Object[this.capacity];
@@ -86,14 +87,16 @@ public class DynamicArray<T> implements Iterable<T>
      */
     public T removeAt(int index)
     {
-        if (index >= this.length || index < 0) throw new IndexOutOfBoundsException();
+        if (index >= this.length || index < 0) 
+            throw new IndexOutOfBoundsException();
 
-        T data = this.array[index];
+        T data        = this.array[index];
         T[] new_array = (T[]) new Object[this.length - 1];
         
         for (int i = 0, j = 0; i < this.length(); i++, j++)
         {
-            if (i == index) j--;
+            if (i == index) 
+                j--;
             else new_array[j] = this.array[i];
         }
 
@@ -115,7 +118,8 @@ public class DynamicArray<T> implements Iterable<T>
     {
         int index = this.indexOf(item);
 
-        if (index == -1) return false;
+        if (index == -1) 
+            return false;
         
         this.removeAt(index);
         
@@ -145,7 +149,9 @@ public class DynamicArray<T> implements Iterable<T>
      */
     public T get(int index)
     {
-        if (index >= this.length || index < 0) throw new IndexOutOfBoundsException();
+        if (index >= this.length || index < 0) 
+            throw new IndexOutOfBoundsException();
+
         return this.array[index];
     }
 
@@ -159,7 +165,9 @@ public class DynamicArray<T> implements Iterable<T>
      */
     public void set(int index, T item)
     {
-        if (index >= this.length || index < 0) throw new IndexOutOfBoundsException();
+        if (index >= this.length || index < 0) 
+            throw new IndexOutOfBoundsException();
+
         this.array[index] = item;
     }
 
@@ -233,7 +241,8 @@ public class DynamicArray<T> implements Iterable<T>
     @Override
     public String toString() 
     {
-        if (this.length() == 0) return "[]";
+        if (this.length() == 0) 
+            return "[]";
         else
         {
             var builder = new StringBuilder(this.length()).append("[");

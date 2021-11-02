@@ -56,7 +56,9 @@ public class Queue<T> implements Iterable<T>
      */
     public T poll()
     {
-        if (this.isEmpty()) throw new RuntimeException("Queue is empty!");
+        if (this.isEmpty()) 
+            throw new RuntimeException("Queue is empty!");
+
         return this.queue.removeFirst();
     }
 
@@ -69,7 +71,9 @@ public class Queue<T> implements Iterable<T>
      */
     public T peek()
     {
-        if (this.isEmpty()) throw new RuntimeException("Queue is empty!");
+        if (this.isEmpty()) 
+            throw new RuntimeException("Queue is empty!");
+            
         return this.queue.peekFirst();
     }
 

@@ -45,7 +45,9 @@ public class Stack<T> implements Iterable<T>
      */
     public T pop()
     {
-        if (this.isEmpty()) throw new EmptyStackException();
+        if (this.isEmpty()) 
+            throw new EmptyStackException();
+
         return this.stack.removeFirst();
     }
 
@@ -58,7 +60,9 @@ public class Stack<T> implements Iterable<T>
      */
     public T peek()
     {
-        if (this.isEmpty()) throw new EmptyStackException();
+        if (this.isEmpty()) 
+            throw new EmptyStackException();
+            
         return this.stack.peekFirst();
     }
 

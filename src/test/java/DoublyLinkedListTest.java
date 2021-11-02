@@ -1,7 +1,7 @@
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
-public class DoublyLinkedListTest 
+public class DoublyLinkedListTest
 {
     @Test
     public void testDefaultConstructor()
