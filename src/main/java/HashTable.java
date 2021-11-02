@@ -100,7 +100,7 @@ public class HashTable<K, V>
     }
 
     /**
-     * Inserts a "new key" -> value pair in hash table.
+     * Inserts a new "key -> value" pair in hash table.
      * If the value already exists inside the hash table, the value is updated.
      * Time  Complexity: worst-case O(n), other O(1)
      * Space Complexity: worst-case O(n), other O(1)
