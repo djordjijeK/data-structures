@@ -1,7 +1,11 @@
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Iterator;
+
 @SuppressWarnings("unchecked")
-public class HashTable<K, V>
+public class HashTable<K, V> implements Iterable<K>
 {
-    // hash table load factor
+    // hash table load factor.
     private double loadFactor;
 
     // the total number of unique keys currently inside the hash table.
@@ -10,7 +14,7 @@ public class HashTable<K, V>
     // the total number of used buckets inside the hash table (includes cells marked as deleted).
     private int usedBuckets;
 
-    // hash table capacity, threshold for resizing.
+    // hash table capacity and threshold for resizing.
     private int capacity;
     private int threshold;
 
@@ -18,10 +22,10 @@ public class HashTable<K, V>
     private K[] keys;
     private V[] values;
 
-    // special marker token used to indicate the deletion of a key-value pair
+    // special marker token used to indicate the deletion of a key-value pair.
     private final K TOMBSTONE = (K) (new Object());
 
-    // hash table constants
+    // hash table constants.
     private static final int    DEFAULT_CAPACITY    = 25;
     private static final double DEFAULT_LOAD_FACTOR = 0.7;
     private static final int    LINEAR_CONSTANT     = 17; 
@@ -32,7 +36,7 @@ public class HashTable<K, V>
     public HashTable()
     {
         this(HashTable.DEFAULT_CAPACITY, HashTable.DEFAULT_LOAD_FACTOR);
-    }
+    } 
 
     /**
      * HashTable constructor.
@@ -59,7 +63,7 @@ public class HashTable<K, V>
             throw new IllegalArgumentException("Illegal load factor: " + loadFactor);
 
         this.capacity   = capacity;
-        this.loadFactor = Math.max(HashTable.DEFAULT_CAPACITY, loadFactor);
+        this.loadFactor = Math.max(HashTable.DEFAULT_LOAD_FACTOR, loadFactor);
         this.threshold  = (int) (this.loadFactor * this.capacity);
 
         // if needed, we need to adjust capacity to avoid probing cycles.
@@ -70,7 +74,7 @@ public class HashTable<K, V>
     }
 
     /**
-     * Puts a new "key -> value" pair in hash table.
+     * Puts a new key-value pair in the hash table.
      * If the value already exists inside the hash table, the value is updated.
      * Time  Complexity: worst-case O(n), other O(1)
      * Space Complexity: worst-case O(n), other O(1)
@@ -85,7 +89,7 @@ public class HashTable<K, V>
     }
 
     /**
-     * Adds a new "key -> value" pair in hash table.
+     * Adds a new key-value pair in hash table.
      * If the value already exists inside the hash table, the value is updated.
      * Time  Complexity: worst-case O(n), other O(1)
      * Space Complexity: worst-case O(n), other O(1)
@@ -100,7 +104,7 @@ public class HashTable<K, V>
     }
 
     /**
-     * Inserts a new "key -> value" pair in hash table.
+     * Inserts a new key-value pair in hash table.
      * If the value already exists inside the hash table, the value is updated.
      * Time  Complexity: worst-case O(n), other O(1)
      * Space Complexity: worst-case O(n), other O(1)
@@ -124,7 +128,8 @@ public class HashTable<K, V>
             // 1. the current slot was previously deleted
             if (this.keys[i] == this.TOMBSTONE)
             {
-                if (j == -1) j = i;
+                if (j == -1) 
+                    j = i;
             }
             // 2. the current cell already contains a key
             else if (this.keys[i] != null)
@@ -256,7 +261,7 @@ public class HashTable<K, V>
 
         // starting at the original hash probe until we find a spot where our key is
         // or we hit a null element in which case our element does not exist.
-        for(int i = offset, j = -1, x = 1; ; i = this.normalizeIndex(offset + this.probe(x++)))
+        for(int i = offset, x = 1; ; i = this.normalizeIndex(offset + this.probe(x++)))
         {
             if (this.keys[i] == this.TOMBSTONE)
                 continue;
@@ -282,7 +287,7 @@ public class HashTable<K, V>
      * Space Complexity: O(1)
      * 
      * @param key - a key.
-     * @return V  -
+     * @return V  - deleted value if exists, null otherwise.
      */
     public V delete(K key)
     {
@@ -374,7 +379,39 @@ public class HashTable<K, V>
     }
 
     /**
-     * Returns size of the hash table (total active keys).
+     * Returns a list of keys found in the hash table.
+     */
+    public List<K> keys()
+    {
+        List<K> hashTableKeys = new ArrayList<>(this.size());
+        
+        for (int i = 0; i < this.capacity; i++)
+        {
+            if (this.keys[i] != null && this.keys[i] != this.TOMBSTONE) 
+                hashTableKeys.add(this.keys[i]);
+        }
+
+        return hashTableKeys;
+    }
+
+    /**
+     * Returns a list of values found in the hash table.
+     */
+    public List<V> values()
+    {
+        List<V> hashTableValues = new ArrayList<>(this.size());
+        
+        for (int i = 0; i < this.capacity; i++)
+        {
+            if (this.keys[i] != null && this.keys[i] != this.TOMBSTONE) 
+                hashTableValues.add(this.values[i]);
+        }
+
+        return hashTableValues;
+    }
+
+    /**
+     * Hash table size (total active keys).
      */
     public int size()
     {
@@ -388,6 +425,67 @@ public class HashTable<K, V>
     {
         return this.size() == 0;
     }
+
+    /**
+     * Hash table capacity getter.
+     */
+    public int getCapacity()
+    {
+        return this.capacity;
+    }
+
+    /**
+     * Hash table load factor getter.
+     */
+    public double getLoadFactor()
+    {
+        return this.loadFactor;
+    }
+
+    @Override
+    public Iterator<K> iterator() {
+        return new Iterator<K>() 
+        {
+            int index, keysLeft = keyCount;
+
+            @Override
+            public boolean hasNext() 
+            {
+                return keysLeft != 0;
+            }
+
+            @Override
+            public K next() 
+            {
+                while (keys[index] == null || keys[index] == TOMBSTONE) index++;
+
+                keysLeft--;
+                return keys[index++];
+            }
+
+            @Override
+            public void remove() 
+            {
+                throw new UnsupportedOperationException();
+            }
+        };
+    }
+
+    @Override
+    public String toString() 
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.append("{");
+
+        for (int i = 0; i < this.capacity; i++)
+          if (this.keys[i] != null && this.keys[i] != TOMBSTONE) 
+            sb.append(this.keys[i] + " => " + this.values[i] + ", ");
+
+        sb.append("}");
+        return sb.toString();    
+    }
+
+    /********************** PRIVATE INTERFACE **********************/
 
     /**
      * Probing function.
