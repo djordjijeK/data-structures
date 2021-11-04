@@ -9,7 +9,7 @@ public class BinarySearchTree<T extends Comparable<T>>
     /**
      * Internal class that represents one node in a BST.
      */
-    private class Node
+    public class Node
     {
         T key;
         Node leftChild;
@@ -92,6 +92,40 @@ public class BinarySearchTree<T extends Comparable<T>>
     }
 
     /**
+     * Removes an item from a BST.
+     * Time  Complexity: worst-case O(n), other O(log n)
+     * Space Complexity: worst-case O(n), other O(log n)
+     * 
+     * @param item     - an item to delete from a BST.
+     * @return boolean - true if it is deleted, false if it did not exist. 
+     */
+    public boolean remove(T item)
+    {
+        return this.delete(item);
+    }
+
+    /**
+     * Deletes an item from a BST.
+     * Time  Complexity: worst-case O(n), other O(log n)
+     * Space Complexity: worst-case O(n), other O(log n)
+     * 
+     * @param item     - an item to delete from a BST.
+     * @return boolean - true if it is deleted, false if it did not exist. 
+     */
+    public boolean delete(T item)
+    {
+        if (this.contains(item))
+        {
+            this.root      = this.delete(this.root, item);
+            this.nodeCount = this.nodeCount - 1;
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      * Checks if BST contains the given element/item.
      * Time  Complexity: worst-case O(n), other O(log n)
      * Space Complexity: worst-case O(n), other O(log n)
@@ -113,7 +147,7 @@ public class BinarySearchTree<T extends Comparable<T>>
      */
     public T findMin()
     {
-        return this.findMin(this.root);
+        return this.findMin(this.root).key;
     }
 
     /**
@@ -125,7 +159,15 @@ public class BinarySearchTree<T extends Comparable<T>>
      */
     public T findMax()
     {
-        return this.findMax(this.root);
+        return this.findMax(this.root).key;
+    }
+
+    /**
+     * BST root getter.
+     */
+    public Node getRoot()
+    {
+        return this.root;
     }
 
     /**
@@ -182,6 +224,51 @@ public class BinarySearchTree<T extends Comparable<T>>
     }
 
     /**
+     * Deletes an item from a BST.
+     * Time  Complexity: worst-case O(n), other O(log n)
+     * Space Complexity: worst-case O(n), other O(log n)
+     * 
+     * @param item     - an item to delete from a BST.
+     * @return boolean - true if it is deleted, false if it did not exist. 
+     */
+    private Node delete(Node root, T item)
+    {
+        if (root == null)
+            return null;
+
+        int cmp = item.compareTo(root.key);
+
+        if (cmp < 0)
+        {
+            root.leftChild  = this.delete(root.leftChild, item);
+        }
+        else if (cmp > 0)
+        {
+            root.rightChild = this.delete(root.rightChild, item);
+        }
+        else
+        {
+            if (root.leftChild == null)
+            {
+                return root.rightChild;
+            }
+            else if (root.rightChild == null)
+            {
+                return root.leftChild;
+            }   
+            else
+            {
+                Node temp = this.findMin(root.rightChild);
+
+                root.key = temp.key;
+                root.rightChild = this.delete(root.rightChild, temp.key);
+            }
+        }
+
+        return root;
+    }
+
+    /**
      * Checks if BST contains the given element/item.
      * Time  Complexity: worst-case O(n), other O(log n)
      * Space Complexity: worst-case O(n), other O(log n)
@@ -213,10 +300,10 @@ public class BinarySearchTree<T extends Comparable<T>>
      * 
      * @return T - minimum element in BST.
      */
-    private T findMin(Node root)
+    private Node findMin(Node root)
     {
         if (root.leftChild == null)
-            return root.key;
+            return root;
 
         return this.findMin(root.leftChild);
     }
@@ -228,10 +315,10 @@ public class BinarySearchTree<T extends Comparable<T>>
      * 
      * @return T - maximum element in BST.
      */
-    private T findMax(Node root)
+    private Node findMax(Node root)
     {
         if (root.rightChild == null)
-            return root.key;
+            return root;
 
         return this.findMax(root.rightChild);
     }

@@ -71,4 +71,51 @@ public class BinarySearchTreeTest
         Assertions.assertFalse(bst.contains(4));
         Assertions.assertFalse(inserted);
     }
+
+    @Test
+    public void testBSTDelete()
+    {
+        BinarySearchTree<Integer> bst = new BinarySearchTree<>();
+
+        bst.insert(10);
+        bst.insert(5);
+        bst.insert(15);
+        bst.insert(1);
+        bst.insert(7);
+        bst.insert(12);
+
+        Assertions.assertFalse(bst.delete(13));
+        Assertions.assertTrue(bst.delete(10));
+        Assertions.assertFalse(bst.contains(10));
+
+        var root = bst.getRoot();
+
+        Assertions.assertEquals(12, root.key);
+        Assertions.assertEquals(5, root.leftChild.key);
+        Assertions.assertEquals(15, root.rightChild.key);
+
+        bst.delete(5);
+
+        root = bst.getRoot();
+
+        Assertions.assertEquals(7, root.leftChild.key);
+        Assertions.assertEquals(15, root.rightChild.key);
+
+        bst.delete(1);
+        bst.delete(12);
+
+        root = bst.getRoot();
+        Assertions.assertEquals(15, root.key);
+        Assertions.assertEquals(7, root.leftChild.key);
+        Assertions.assertEquals(null, root.rightChild);
+
+        bst.delete(7);
+        bst.delete(15);
+
+        Assertions.assertEquals(0, bst.size());
+
+        root = bst.getRoot();
+
+        Assertions.assertEquals(null, root);
+    }
 }
