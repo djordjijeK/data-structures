@@ -3,10 +3,8 @@ public class Heap<T extends Comparable<T>>
     // a dynamic array to track the elements inside the heap.
     private DynamicArray<T> heap;
 
-    // this map keeps track of the possible indices a particular
-    // value is found in the heap array. Having this mapping lets
-    // us have O(log n) removals and O(1) element containment check
-    // at the cost of some additional space and minor overhead.
+    // having this mapping lets us have O(log n) removals and O(1) 
+    // element containment check at the cost of some additional space and minor overhead.
     private HashTable<T, HashSet<Integer>> map = new HashTable<>();
 
     /**
@@ -47,12 +45,12 @@ public class Heap<T extends Comparable<T>>
     }
 
     /**
-     * Returns the value of the element with the lowest priority in the priority queue.
+     * Returns the minimum value in the heap.
      * If the priority queue is empty, the null is returned.
      * Time  Complexity: O(1)
      * Space Complexity: O(1)
      * 
-     * @return T - the element with the lowest priority.
+     * @return T - the minimum element in the heap.
      */
     public T peek() 
     {
@@ -78,18 +76,81 @@ public class Heap<T extends Comparable<T>>
         return this.map.containsKey(element);
     }
 
-    // // Adds an element to the priority queue, the
-    // // element must not be null, O(log(n))
-    // public void add(T elem) 
-    // {
-    //     if (elem == null) throw new IllegalArgumentException();
+    /**
+     * Adds new element to the heap.
+     * Time  Complexity: O(log n)
+     * Space Complexity: O(1)
+     * 
+     * @param element - an element to be added to the heap.
+     */
+    public void add(T element) 
+    {
+        if (element == null) 
+            throw new IllegalArgumentException();
 
-    //     heap.add(elem);
-    //     int indexOfLastElem = size() - 1;
-    //     mapAdd(elem, indexOfLastElem);
+        this.heap.append(element);
+        int indexOfLastElem = this.size() - 1;
 
-    //     swim(indexOfLastElem);
-    // }
+        this.updateMap(element, indexOfLastElem);
+        this.swim(indexOfLastElem);
+    }
+
+    /**
+     * Removes an element from the heap.
+     * Time  Complexity: O(log n)
+     * Space Complexity: O(1)
+     * 
+     * @param element  - an element to be removed from the heap.
+     * @return boolean - true if an element is removed, false otherwise.
+     */
+    public boolean remove(T element) {
+
+        if (element == null) 
+            return false;
+    
+        Integer index = this.mapGet(element);
+
+        if (index != null) 
+            this.removeAt(index);
+
+        return index != null;
+    }
+
+    /**
+     * Removes an element at index.
+     * Time  Complexity: O(log n)
+     * Space Complexity: O(1)
+     * 
+     * @param index    - index of an element to remove.
+     * @return boolean - removed element if exists, null otherwise.
+     */
+    private T removeAt(int index) 
+    {
+        if (this.isEmpty()) 
+            return null;
+    
+        int indexOfLastElem = this.size() - 1;
+        T removed_data = this.heap.get(index);
+        this.swap(index, indexOfLastElem);
+    
+        // Obliterate the value
+        this.heap.removeAt(indexOfLastElem);
+        mapRemove(removed_data, indexOfLastElem);
+    
+        if (index == indexOfLastElem) 
+            return removed_data;
+    
+        T element = this.heap.get(index);
+    
+        // Try sinking element
+        this.sink(index);
+    
+        // If sinking did not work try swimming
+        if (this.heap.get(index).equals(element)) 
+            this.swim(index);
+    
+        return removed_data;
+      }
 
     /**
      * Returns the heap size.
@@ -185,6 +246,39 @@ public class Heap<T extends Comparable<T>>
     }
 
     /**
+     * Gets the value from the map that represents our internal index.
+     */
+    private Integer mapGet(T value) 
+    {
+        HashSet<Integer> set = this.map.get(value);
+
+        if (set != null) 
+        {
+            Integer max = Integer.MIN_VALUE;
+
+            for(Integer x : set)
+            {
+                if (x > max)
+                    max = x;
+            }
+
+            return max;
+        }
+
+        return null;
+    }
+
+    private void mapRemove(T value, int index) 
+    {
+        HashSet<Integer> set = this.map.get(value);
+
+        set.remove(index);
+
+        if (set.size() == 0) 
+            map.remove(value);
+    }
+
+    /**
      * Sinks the node to the correct position to satisfy the heap invariant.
      * Time  Complexity: O(log n)
      * Space Complexity: O(1)
@@ -208,6 +302,26 @@ public class Heap<T extends Comparable<T>>
 
             this.swap(rootIndex, smallestIndex);
             rootIndex = smallestIndex;
+        }
+    }
+
+    /**
+     * Swims the node to the correct position to satisfy the heap invariant.
+     * Time  Complexity: O(log n)
+     * Space Complexity: O(1)
+     * 
+     * @param rootIndex - index of an swimming element.
+     */
+    private void swim(int rootIndex)
+    {
+        int parent = (rootIndex - 1) / 2;
+
+        while (rootIndex > 0 && this.less(parent, rootIndex))
+        {
+            this.swap(parent, rootIndex);
+
+            rootIndex = parent;
+            parent = (rootIndex - 1) / 2;
         }
     }
 
