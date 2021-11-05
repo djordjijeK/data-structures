@@ -42,7 +42,7 @@ Unlike arrays, the elements in the linked list are not stored in the contiguous 
 | Delete (@ end) | O(1) | O(1) | due to immediate tail access. If the list is singly linked, then this operation takes O(n) time and O(1) space |
 | Update | O(n) | O(1) | we need to traverse a linked list in order to update an element |
 
-## 3. Stack
+## 3. [Stack](src/main/java/Stack.java)
 
 **Stack** is a last in, first out (**LIFO**) data structure. The element that was added last will be the one to be removed first. 
 
@@ -56,7 +56,7 @@ Unlike arrays, the elements in the linked list are not stored in the contiguous 
 | Pop | O(1) | O(1) | removes an element from the top of the stack |
 | Peek | O(1) | O(1) | peeks at the top of the stack without removing an element |
 
-## 4. Queue
+## 4. [Queue](src/main/java/Queue.java)
 
 **Queue** is a collection of entities that are maintained in a sequence and can be modified by the addition of entities at one end of the sequence (tail, rear) and the removal of entities from the other end of the sequence (head).
 It maintains the the first in, first out (**FIFO**) policy.
