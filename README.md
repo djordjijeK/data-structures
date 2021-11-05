@@ -27,7 +27,9 @@ All elements of the array are stored in contiguous memory locations.
 In other words, each node contains a pointer to the next node (it may also include the pointer to the previous node) forming a sequence.
 Unlike arrays, the elements in the linked list are not stored in the contiguous memory locations.
 
-![Doubly Linked List](https://manikareahome.files.wordpress.com/2020/12/two-way-or-doubly-linked-list.gif)
+<p align="center">
+  <img src="https://manikareahome.files.wordpress.com/2020/12/two-way-or-doubly-linked-list.gif" alt="Linked List"/>
+</p>
 
 | Operation | Time Complexity | Space Complexity | Note |
 | :--: | :--: | :--: | :--: |
@@ -44,7 +46,9 @@ Unlike arrays, the elements in the linked list are not stored in the contiguous 
 
 **Stack** is a last in, first out (**LIFO**) data structure. The element that was added last will be the one to be removed first. 
 
-![Stack](https://cdn.programiz.com/sites/tutorial2program/files/stack.png)
+<p align="center">
+  <img src="https://cdn.programiz.com/sites/tutorial2program/files/stack.png" alt="Stack"/>
+</p>
 
 | Operation | Time Complexity | Space Complexity | Note |
 | :--: | :--: | :--: | :--: |
@@ -53,6 +57,19 @@ Unlike arrays, the elements in the linked list are not stored in the contiguous 
 | Peek | O(1) | O(1) | peeks at the top of the stack without removing an element |
 
 ## 4. Queue
+
+**Queue** is a collection of entities that are maintained in a sequence and can be modified by the addition of entities at one end of the sequence (tail, rear) and the removal of entities from the other end of the sequence (head).
+It maintains the the first in, first out (**FIFO**) policy.
+
+<p align="center">
+  <img src="https://cdn.programiz.com/sites/tutorial2program/files/queue.png" alt="Queue">
+</p>
+
+| Operation | Time Complexity | Space Complexity | Note |
+| :--: | :--: | :--: | :--: |
+| Enqueue / Offer | O(1) | O(1) | adds a new element to the queue |
+| Dequeue / Poll | O(1) | O(1) | removes an element from the front of the queue |
+| Peek | O(1) | O(1) | peeks at the front of the queue without removing an element |
 
 ## 5. Hash Table
 

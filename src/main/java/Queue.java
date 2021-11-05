@@ -15,12 +15,12 @@ public class Queue<T> implements Iterable<T>
     /**
      * Queue constructor. Create a queue with an initial element.
      * 
-     * @param item - an item to be queued.
+     * @param element - an element to be queued.
      */
-    public Queue(T item)
+    public Queue(T element)
     {
         this.queue = new DoublyLinkedList<T>();
-        this.queue.prepend(item);
+        this.queue.prepend(element);
     }
 
     /**
@@ -28,11 +28,11 @@ public class Queue<T> implements Iterable<T>
      * Time  Complexity: O(1)
      * Space Complexity: O(1)
      * 
-     * @param item - an item to be enqueued.
+     * @param element - an element to be enqueued.
      */
-    public void enqueue(T item)
+    public void enqueue(T element)
     {
-        this.queue.append(item);
+        this.queue.append(element);
     }
 
     /**
@@ -40,11 +40,11 @@ public class Queue<T> implements Iterable<T>
      * Time  Complexity: O(1)
      * Space Complexity: O(1)
      * 
-     * @param item - an item to be enqueued.
+     * @param element - an element to be enqueued.
      */
-    public void offer(T item)
+    public void offer(T element)
     {
-        this.enqueue(item);
+        this.enqueue(element);
     }
 
     /**
@@ -52,7 +52,7 @@ public class Queue<T> implements Iterable<T>
      * Time  Complexity: O(1)
      * Space Complexity: O(1)
      * 
-     * @return T - the polled item.
+     * @return T - the polled element.
      */
     public T poll()
     {
@@ -67,7 +67,7 @@ public class Queue<T> implements Iterable<T>
      * Time  Complexity: O(1)
      * Space Complexity: O(1)
      * 
-     * @return T - the polled item.
+     * @return T - the peeked element.
      */
     public T peek()
     {
@@ -82,12 +82,12 @@ public class Queue<T> implements Iterable<T>
      * Time  Complexity: O(n)
      * Space Complexity: O(1)
      * 
-     * @param item - item to search for. 
-     * @return int - index of an item if exists, -1 otherwise.
+     * @param element - an element to search for. 
+     * @return int    - index of an element if exists, -1 otherwise.
      */
-    public int indexOf(T item)
+    public int indexOf(T element)
     {
-        return this.queue.indexOf(item);
+        return this.queue.indexOf(element);
     }
 
     /**
@@ -112,6 +112,9 @@ public class Queue<T> implements Iterable<T>
         return this.queue.iterator();
     }
 
+    /**
+     * Queue class string representation.
+     */
     @Override
     public String toString() 
     {
