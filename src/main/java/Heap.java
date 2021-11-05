@@ -3,10 +3,6 @@ public class Heap<T extends Comparable<T>>
     // a dynamic array to track the elements inside the heap.
     private DynamicArray<T> heap;
 
-    // having this mapping lets us have O(log n) removals and O(1) 
-    // element containment check at the cost of some additional space and minor overhead.
-    private HashTable<T, HashSet<Integer>> map = new HashTable<>();
-
     /**
      * Heap constructor.
      */
@@ -35,10 +31,7 @@ public class Heap<T extends Comparable<T>>
         this.heap = new DynamicArray<>(elements.length);
 
         for (int i = 0; i < elements.length; i++)
-        {
-            this.updateMap(elements[i], i);
             this.heap.append(elements[i]);
-        }
 
         for (int i = Math.max(0, (this.heap.length() / 2) - 1); i >= 0; i--)
             this.sink(i);
@@ -46,7 +39,7 @@ public class Heap<T extends Comparable<T>>
 
     /**
      * Returns the minimum value in the heap.
-     * If the priority queue is empty, the null is returned.
+     * If the heap is empty, the null is returned.
      * Time  Complexity: O(1)
      * Space Complexity: O(1)
      * 
@@ -61,8 +54,20 @@ public class Heap<T extends Comparable<T>>
     }
 
     /**
+     * Removes the root of the heap
+     * Time  Complexity: O(log n)
+     * Space Complexity: O(1)
+     * 
+     * @return T - heap's root.
+     */
+    public T poll() 
+    {
+        return this.removeAt(0);
+    }
+
+    /**
      * Checks if an element is in the heap.
-     * Time  Complexity: O(1)
+     * Time  Complexity: O(n)
      * Space Complexity: O(1)
      * 
      * @param element  - an element to look for.
@@ -70,10 +75,11 @@ public class Heap<T extends Comparable<T>>
      */
     public boolean contains(T element) 
     {
-        if (element == null) 
-            return false;
-
-        return this.map.containsKey(element);
+        for (int index = 0; index < this.size(); index++) 
+            if (this.heap.get(index).equals(element)) 
+                return true;
+            
+        return false;
     }
 
     /**
@@ -91,29 +97,32 @@ public class Heap<T extends Comparable<T>>
         this.heap.append(element);
         int indexOfLastElem = this.size() - 1;
 
-        this.updateMap(element, indexOfLastElem);
         this.swim(indexOfLastElem);
     }
 
     /**
      * Removes an element from the heap.
-     * Time  Complexity: O(log n)
+     * Time  Complexity: O(n)
      * Space Complexity: O(1)
      * 
      * @param element  - an element to be removed from the heap.
      * @return boolean - true if an element is removed, false otherwise.
      */
-    public boolean remove(T element) {
-
+    public boolean remove(T element) 
+    {
         if (element == null) 
             return false;
     
-        Integer index = this.mapGet(element);
+        for (int i = 0; i < this.size(); i++) 
+        {
+            if (element.equals(this.heap.get(i))) 
+            {
+                this.removeAt(i);
+                return true;
+            }
+        }
 
-        if (index != null) 
-            this.removeAt(index);
-
-        return index != null;
+        return false;
     }
 
     /**
@@ -133,19 +142,17 @@ public class Heap<T extends Comparable<T>>
         T removed_data = this.heap.get(index);
         this.swap(index, indexOfLastElem);
     
-        // Obliterate the value
         this.heap.removeAt(indexOfLastElem);
-        mapRemove(removed_data, indexOfLastElem);
     
         if (index == indexOfLastElem) 
             return removed_data;
     
         T element = this.heap.get(index);
     
-        // Try sinking element
+        // try sinking element
         this.sink(index);
     
-        // If sinking did not work try swimming
+        // if sinking did not work try swimming
         if (this.heap.get(index).equals(element)) 
             this.swim(index);
     
@@ -194,9 +201,11 @@ public class Heap<T extends Comparable<T>>
     public void clear()
     {
         this.heap.clear();
-        this.map.clear();
     }
 
+    /**
+     * Heap class string representation.
+     */
     @Override
     public String toString() 
     {
@@ -204,79 +213,6 @@ public class Heap<T extends Comparable<T>>
     }
 
     /********************** PRIVATE INTERFACE **********************/
-
-    /**
-     * Updates the map that represents our internal index.
-     * Time  Complexity: worst-case O(n), other O(1)
-     * Space Complexity: worst-case O(n), other O(1)
-     * 
-     * @param element - heap's element.
-     * @param index   - element's new index.
-     */
-    private void updateMap(T element, int index)
-    {
-        HashSet<Integer> set = this.map.get(element);
-
-        if (set == null)
-        {
-            set = new HashSet<>();
-            set.add(index);
-
-            this.map.insert(element, set);
-        }
-        else
-        {
-            set.add(index);
-        }
-    }
-
-    /**
-     * Updates the map that represents our internal index by swapping indices for swapping elements.
-     */
-    private void swapMap(T firstElement, T secondElement, int firstIndex, int secondIndex)
-    {
-        HashSet<Integer> firstSet  = this.map.get(firstElement);
-        HashSet<Integer> secondSet = this.map.get(secondElement);
-    
-        firstSet.remove(firstIndex);
-        secondSet.remove(secondIndex);
-    
-        firstSet.add(secondIndex);
-        secondSet.add(firstIndex);
-    }
-
-    /**
-     * Gets the value from the map that represents our internal index.
-     */
-    private Integer mapGet(T value) 
-    {
-        HashSet<Integer> set = this.map.get(value);
-
-        if (set != null) 
-        {
-            Integer max = Integer.MIN_VALUE;
-
-            for(Integer x : set)
-            {
-                if (x > max)
-                    max = x;
-            }
-
-            return max;
-        }
-
-        return null;
-    }
-
-    private void mapRemove(T value, int index) 
-    {
-        HashSet<Integer> set = this.map.get(value);
-
-        set.remove(index);
-
-        if (set.size() == 0) 
-            map.remove(value);
-    }
 
     /**
      * Sinks the node to the correct position to satisfy the heap invariant.
@@ -350,14 +286,12 @@ public class Heap<T extends Comparable<T>>
      * @param left  - an index of a left child.
      * @param right - an index of a right child.
      */
-    private void swap(int firstIndex, int secondIndex) {
-
+    private void swap(int firstIndex, int secondIndex) 
+    {
         T firstElement  = this.heap.get(firstIndex);
         T secondElement = this.heap.get(secondIndex);
 
         heap.set(firstIndex, secondElement);
         heap.set(secondIndex, firstElement);
-
-        this.swapMap(firstElement, secondElement, firstIndex, secondIndex);
     }
 }

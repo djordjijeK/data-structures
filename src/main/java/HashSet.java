@@ -92,6 +92,9 @@ public class HashSet<T> implements Iterable<T>
         return this.map.iterator();    
     }
 
+    /**
+     * HashSet class string representation.
+     */
     @Override
     public String toString() 
     {
