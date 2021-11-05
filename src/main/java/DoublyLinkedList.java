@@ -61,33 +61,33 @@ public class DoublyLinkedList<T> implements Iterable<T>
     }
 
     /**
-     * Adds a new item at the end of a linked list.
+     * Adds a new element at the end of the linked list.
      * Time  Complexity: O(1)
      * Space Complexity: O(1)
      * 
-     * @param item - new item to be appended.
+     * @param element - new element to be appended.
      */
-    public void add(T item)
+    public void add(T element)
     {
-        this.append(item);
+        this.append(element);
     }
 
     /**
-     * Appends a new item at the end of a linked list.
+     * Appends a new element at the end of the linked list.
      * Time  Complexity: O(1)
      * Space Complexity: O(1)
      * 
-     * @param item - new item to be appended.
+     * @param element - new element to be appended.
      */
-    public void append(T item)
+    public void append(T element)
     {
         if (this.isEmpty())
         {
-            this.head = this.tail = new Node<T>(item);
+            this.head = this.tail = new Node<T>(element);
         }
         else
         {
-            this.tail.next = new Node<T>(item, this.tail, null);
+            this.tail.next = new Node<T>(element, this.tail, null);
             this.tail      = this.tail.next;
         }
 
@@ -95,21 +95,21 @@ public class DoublyLinkedList<T> implements Iterable<T>
     }
 
     /**
-     * Adds a new item at the beginning of a linked list.
+     * Adds a new element at the beginning of a linked list.
      * Time  Complexity: O(1)
      * Space Complexity: O(1)
      * 
-     * @param item - new item to be prepended.
+     * @param element - new element to be prepended.
      */
-    public void prepend(T item)
+    public void prepend(T element)
     {
         if (this.isEmpty())
         {
-            this.head = this.tail = new Node<T>(item);
+            this.head = this.tail = new Node<T>(element);
         }
         else
         {
-            this.head.previous = new Node<T>(item, null, this.head);
+            this.head.previous = new Node<T>(element, null, this.head);
             this.head = this.head.previous;
         }
 
@@ -117,27 +117,27 @@ public class DoublyLinkedList<T> implements Iterable<T>
     }
 
     /**
-     * Adds a new item in a linked list at the specified index.
+     * Adds a new element in the linked list at the specified index.
      * Time  Complexity: O(n)
      * Space Complexity: O(1)
      * 
-     * @param index - an index to insert a new item. 
-     * @param item  - new item to be inserted.
+     * @param index - an index to insert a new element. 
+     * @param element  - new element to be inserted.
      */
-    public void insertAt(int index, T item)
+    public void insertAt(int index, T element)
     {
         if (index < 0 || index > this.length())
             throw new IndexOutOfBoundsException();
 
         if (index == 0)
         {
-            this.prepend(item);
+            this.prepend(element);
             return;
         } 
         
         if (index == this.length())
         {
-            this.append(item);
+            this.append(element);
             return;
         }
 
@@ -146,7 +146,7 @@ public class DoublyLinkedList<T> implements Iterable<T>
         for (int i = 0; i < index - 1; i++)
             temp = temp.next;
 
-        Node<T> newNode    = new Node<T>(item, temp, temp.next);
+        Node<T> newNode    = new Node<T>(element, temp, temp.next);
         temp.next.previous = newNode;
         temp.next          = newNode;
 
@@ -154,12 +154,12 @@ public class DoublyLinkedList<T> implements Iterable<T>
     }
 
     /**
-     * Removes an item in a linked list at the specified index.
+     * Removes an element in a linked list at the specified index.
      * Time  Complexity: O(n)
      * Space Complexity: O(1)
      * 
-     * @param index - an index to remove an item. 
-     * @return T    - an item at the specified index.
+     * @param index - an index to remove an element. 
+     * @return T    - an element at the specified index.
      */
     public T removeAt(int index)
     {
@@ -199,19 +199,19 @@ public class DoublyLinkedList<T> implements Iterable<T>
     }
 
     /**
-     * Finds an index of a particular value in a linked list.
+     * Finds an index of a particular value in the linked list.
      * Time  Complexity: O(n)
      * Space Complexity: O(1)
      * 
-     * @param item  - item to search for. 
-     * @return int  - index of an item in the list if exists, -1 otherwise.
+     * @param element - element to search for. 
+     * @return int    - index of an element in the list if exists, -1 otherwise.
      */
-    public int indexOf(T item)
+    public int indexOf(T element)
     {
         int index = 0;
         Node<T> current = this.head;
 
-        if (item == null)
+        if (element == null)
         {
             for(; current != null; current = current.next, index++)
             {
@@ -223,7 +223,7 @@ public class DoublyLinkedList<T> implements Iterable<T>
         {
             for(; current != null; current = current.next, index++)
             {
-                if (item.equals(current.key))
+                if (element.equals(current.key))
                     return index;
             } 
         }
@@ -232,16 +232,16 @@ public class DoublyLinkedList<T> implements Iterable<T>
     }
 
     /**
-     * Checks if an item exists in a linked list.
+     * Checks if an element exists in a linked list.
      * Time  Complexity: O(n)
      * Space Complexity: O(1)
      * 
-     * @param item     - item to search for. 
-     * @return boolean - true if an item exists in a linked list, false otherwise.
+     * @param element  - element to search for. 
+     * @return boolean - true if an element exists in a linked list, false otherwise.
      */
-    public boolean contains(T item)
+    public boolean contains(T element)
     {
-        return this.indexOf(item) != -1;
+        return this.indexOf(element) != -1;
     }
 
     /**
@@ -289,12 +289,12 @@ public class DoublyLinkedList<T> implements Iterable<T>
     }
 
     /**
-     * Returns an item at the specified index.
+     * Returns an element at the specified index.
      * Time  Complexity: O(n)
      * Space Complexity: O(1)
      * 
-     * @param index - item's index.
-     * @return T    - an item at the specified index.
+     * @param index - element's index.
+     * @return T    - an element at the specified index.
      */
     public T get(int index)
     {
@@ -433,6 +433,9 @@ public class DoublyLinkedList<T> implements Iterable<T>
         };   
     }
 
+    /**
+     * DoublyLinkedList class string representation.
+     */
     @Override
     public String toString() 
     {
