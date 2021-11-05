@@ -16,12 +16,12 @@ public class Stack<T> implements Iterable<T>
     /**
      * Stack constructor. Create a stack with an initial element.
      * 
-     * @param item - an item to be pushed on the stack.
+     * @param element - an element to be pushed on the stack.
      */
-    public Stack(T item)
+    public Stack(T element)
     {
         this.stack = new DoublyLinkedList<T>();
-        this.stack.prepend(item);
+        this.stack.prepend(element);
     }
 
     /**
@@ -29,11 +29,11 @@ public class Stack<T> implements Iterable<T>
      * Time  Complexity: O(1)
      * Space Complexity: O(1)
      * 
-     * @param item - an item to be pushed on the stack.
+     * @param element - an element to be pushed on the stack.
      */
-    public void push(T item)
+    public void push(T element)
     {
-        this.stack.prepend(item);
+        this.stack.prepend(element);
     }
 
     /**
@@ -41,7 +41,7 @@ public class Stack<T> implements Iterable<T>
      * Time  Complexity: O(1)
      * Space Complexity: O(1)
      * 
-     * @return T - the popped item.
+     * @return T - the popped element.
      */
     public T pop()
     {
@@ -56,7 +56,7 @@ public class Stack<T> implements Iterable<T>
      * Time  Complexity: O(1)
      * Space Complexity: O(1)
      * 
-     * @return T - the value of an item at the top of the stack.
+     * @return T - the value of an element at the top of the stack.
      */
     public T peek()
     {
@@ -71,12 +71,12 @@ public class Stack<T> implements Iterable<T>
      * Time  Complexity: O(n)
      * Space Complexity: O(1)
      * 
-     * @param item - item to search for. 
-     * @return int - index of an item if exists, -1 otherwise.
+     * @param element - an element to search for. 
+     * @return int    - index of an element if exists, -1 otherwise.
      */
-    public int indexOf(T item)
+    public int indexOf(T element)
     {
-        return this.stack.indexOf(item);
+        return this.stack.indexOf(element);
     }
 
     /**
@@ -101,6 +101,9 @@ public class Stack<T> implements Iterable<T>
         return this.stack.iterator();
     }
 
+    /**
+     * Stack class string representation.
+     */
     @Override
     public String toString() 
     {

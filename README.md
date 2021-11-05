@@ -30,7 +30,7 @@ Unlike arrays, the elements in the linked list are not stored in the contiguous 
 ![Doubly Linked List](https://manikareahome.files.wordpress.com/2020/12/two-way-or-doubly-linked-list.gif)
 
 | Operation | Time Complexity | Space Complexity | Note |
-| :-- | :--: | :--: | :--: |
+| :--: | :--: | :--: | :--: |
 | Indexing | O(n) | O(1) | we need to traverse a linked list in order to index an element |
 | Insert (@ beginning) | O(1) | O(1) | due to immediate head access |
 | Insert (@ middle) | O(n) | O(1) | due to element shifting |
@@ -41,6 +41,16 @@ Unlike arrays, the elements in the linked list are not stored in the contiguous 
 | Update | O(n) | O(1) | we need to traverse a linked list in order to update an element |
 
 ## 3. Stack
+
+**Stack** is a last in, first out (**LIFO**) data structure. The element that was added last will be the one to be removed first. 
+
+![Stack](https://cdn.programiz.com/sites/tutorial2program/files/stack.png)
+
+| Operation | Time Complexity | Space Complexity | Note |
+| :--: | :--: | :--: | :--: |
+| Push | O(1) | O(1) | puts an element at the top of the stack |
+| Pop | O(1) | O(1) | removes an element from the top of the stack |
+| Peek | O(1) | O(1) | peeks at the top of the stack without removing an element |
 
 ## 4. Queue
 
