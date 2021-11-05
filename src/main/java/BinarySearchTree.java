@@ -58,33 +58,33 @@ public class BinarySearchTree<T extends Comparable<T>>
     }
 
     /**
-     * Adds a new item to the BST.
+     * Adds a new element to the BST.
      * Time  Complexity: worst-case O(n), other O(log n)
      * Space Complexity: worst-case O(n), other O(log n)
      * 
-     * @param item     - a new item to insert into a BST.
+     * @param element  - a new element to insert into a BST.
      * @return boolean - true if it is inserted, false if it already exists. 
      */
-    public boolean add(T item)
+    public boolean add(T element)
     {
-        return this.insert(item);
+        return this.insert(element);
     }
 
     /**
-     * Inserts a new item to the BST.
+     * Inserts a new element to the BST.
      * Time  Complexity: worst-case O(n), other O(log n)
      * Space Complexity: worst-case O(n), other O(log n)
      * 
-     * @param item     - a new item to insert into a BST.
+     * @param element  - a new element to insert into a BST.
      * @return boolean - true if it is inserted, false if it already exists. 
      */
-    public boolean insert(T item)
+    public boolean insert(T element)
     {
-        if (this.contains(item))
+        if (this.contains(element))
             return false;
         else
         {
-            this.root      = this.insert(this.root, item);
+            this.root      = this.insert(this.root, element);
             this.nodeCount = this.nodeCount + 1;
 
             return true;
@@ -92,31 +92,31 @@ public class BinarySearchTree<T extends Comparable<T>>
     }
 
     /**
-     * Removes an item from a BST.
+     * Removes an element from a BST.
      * Time  Complexity: worst-case O(n), other O(log n)
      * Space Complexity: worst-case O(n), other O(log n)
      * 
-     * @param item     - an item to delete from a BST.
+     * @param element  - an element to delete from a BST.
      * @return boolean - true if it is deleted, false if it did not exist. 
      */
-    public boolean remove(T item)
+    public boolean remove(T element)
     {
-        return this.delete(item);
+        return this.delete(element);
     }
 
     /**
-     * Deletes an item from a BST.
+     * Deletes an element from a BST.
      * Time  Complexity: worst-case O(n), other O(log n)
      * Space Complexity: worst-case O(n), other O(log n)
      * 
-     * @param item     - an item to delete from a BST.
+     * @param element  - an element to delete from a BST.
      * @return boolean - true if it is deleted, false if it did not exist. 
      */
-    public boolean delete(T item)
+    public boolean delete(T element)
     {
-        if (this.contains(item))
+        if (this.contains(element))
         {
-            this.root      = this.delete(this.root, item);
+            this.root      = this.delete(this.root, element);
             this.nodeCount = this.nodeCount - 1;
 
             return true;
@@ -126,16 +126,16 @@ public class BinarySearchTree<T extends Comparable<T>>
     }
 
     /**
-     * Checks if BST contains the given element/item.
+     * Checks if BST contains the given element/element.
      * Time  Complexity: worst-case O(n), other O(log n)
      * Space Complexity: worst-case O(n), other O(log n)
      * 
-     * @param item     - item to look for.
-     * @return boolean - true if the item exists, false otherwise.
+     * @param element  - element to look for.
+     * @return boolean - true if the element exists, false otherwise.
      */
-    public boolean contains(T item)
+    public boolean contains(T element)
     {
-        return this.contains(this.root, item);
+        return this.contains(this.root, element);
     }
 
     /**
@@ -199,52 +199,52 @@ public class BinarySearchTree<T extends Comparable<T>>
     /********************** PRIVATE INTERFACE **********************/
 
     /**
-     * Inserts a new item to the BST.
+     * Inserts a new element to the BST.
      * Time  Complexity: worst-case O(n), other O(log n)
      * Space Complexity: worst-case O(n), other O(log n)
      * 
-     * @param item     - a new item to insert into a BST.
+     * @param element  - a new element to insert into a BST.
      * @param root     - current subtree root.
      * @return boolean - true if it is inserted, false if it already exists. 
      */
-    private Node insert(Node root, T item)
+    private Node insert(Node root, T element)
     {
         if (root == null)
-            return new Node(item);
+            return new Node(element);
 
-        int cmp = item.compareTo(root.key);
+        int cmp = element.compareTo(root.key);
 
         if (cmp < 0)
-            root.leftChild = this.insert(root.leftChild, item);
+            root.leftChild = this.insert(root.leftChild, element);
 
         if (cmp > 0)
-            root.rightChild = this.insert(root.rightChild, item);
+            root.rightChild = this.insert(root.rightChild, element);
 
         return root;
     }
 
     /**
-     * Deletes an item from a BST.
+     * Deletes an element from a BST.
      * Time  Complexity: worst-case O(n), other O(log n)
      * Space Complexity: worst-case O(n), other O(log n)
      * 
-     * @param item     - an item to delete from a BST.
+     * @param element  - an element to delete from a BST.
      * @return boolean - true if it is deleted, false if it did not exist. 
      */
-    private Node delete(Node root, T item)
+    private Node delete(Node root, T element)
     {
         if (root == null)
             return null;
 
-        int cmp = item.compareTo(root.key);
+        int cmp = element.compareTo(root.key);
 
         if (cmp < 0)
         {
-            root.leftChild  = this.delete(root.leftChild, item);
+            root.leftChild  = this.delete(root.leftChild, element);
         }
         else if (cmp > 0)
         {
-            root.rightChild = this.delete(root.rightChild, item);
+            root.rightChild = this.delete(root.rightChild, element);
         }
         else
         {
@@ -269,26 +269,26 @@ public class BinarySearchTree<T extends Comparable<T>>
     }
 
     /**
-     * Checks if BST contains the given element/item.
+     * Checks if BST contains the given element/element.
      * Time  Complexity: worst-case O(n), other O(log n)
      * Space Complexity: worst-case O(n), other O(log n)
      * 
-     * @param item     - item to look for.
+     * @param element  - element to look for.
      * @param root     - current subtree root.
-     * @return boolean - true if the item exists, false otherwise.
+     * @return boolean - true if the element exists, false otherwise.
      */
-    private boolean contains(Node root, T item)
+    private boolean contains(Node root, T element)
     {
         if (root == null)
             return false;
 
-        int cmp = item.compareTo(root.key);
+        int cmp = element.compareTo(root.key);
 
         if (cmp < 0) 
-            return this.contains(root.leftChild, item);
+            return this.contains(root.leftChild, element);
 
         if (cmp > 0) 
-            return this.contains(root.rightChild, item);
+            return this.contains(root.rightChild, element);
 
         return true;
     }

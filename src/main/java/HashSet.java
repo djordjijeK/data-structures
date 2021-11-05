@@ -28,8 +28,8 @@ public class HashSet<T> implements Iterable<T>
      * Time  Complexity: worst-case O(n), other O(1)
      * Space Complexity: worst-case O(n), other O(1)
      * 
-     * @param item     - an item to be added to the hash set. 
-     * @return boolean - true if the item is added, false if the item already exists.
+     * @param element  - an element to be added to the hash set. 
+     * @return boolean - true if the element is added, false if the element already exists.
      */
     public boolean add(T element) 
     {

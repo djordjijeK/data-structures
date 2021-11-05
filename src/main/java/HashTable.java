@@ -1,6 +1,6 @@
 import java.util.List;
-import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.ArrayList;
 
 @SuppressWarnings("unchecked")
 public class HashTable<K, V> implements Iterable<K>
@@ -471,6 +471,9 @@ public class HashTable<K, V> implements Iterable<K>
         };
     }
 
+    /**
+     * HashTable class string representation.
+     */
     @Override
     public String toString() 
     {

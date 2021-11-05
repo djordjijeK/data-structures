@@ -71,10 +71,52 @@ It maintains the the first in, first out (**FIFO**) policy.
 | Dequeue / Poll | O(1) | O(1) | removes an element from the front of the queue |
 | Peek | O(1) | O(1) | peeks at the front of the queue without removing an element |
 
-## 5. Hash Table
+## 5. [Hash Table](src/main/java/HashTable.java)
 
-## 6. Binary Search Tree
+**HashTable** is a data structure that map keys to values. 
+A hash table uses a hash function to compute an index (a.k.a hash code) into an array of buckets from which the desired key-value pair can be found. 
+During lookup, the key is hashed and the resulting hash indicates where the corresponding key-value is stored.
 
-## 7. Set
+Ideally, the hash function will assign each key to a unique bucket, but most hash table designs employ an imperfect hash function, which might cause hash collisions where the hash function generates the same index for more than one key.
+Such collisions are typically handled using some of the collision resolution protocols (separate chaining, open addressing, double hashing etc.)
 
-## 8. Heap
+<p align="center">
+  <img src="https://yourbasic.org/algorithms/hash-table.png" alt="Hash Table">
+</p>
+
+| Operation | Time Complexity | Space Complexity | Note |
+| :--: | :--: | :--: | :--: |
+| Index | O(1) | O(1) | the cost of access to the elements |
+| Insert | O(1) | O(1) | when resizing is required, this operation takes O(n) time and O(n) space |
+| Delete | O(1) | O(1) | - |
+| Update | O(1) | O(1) | - |
+
+## 6. [Binary Search Tree](src/main/java/BinarySearchTree.java)
+
+**Binary Search Tree (BST)** is a rooted binary tree data structure whose internal nodes each store a key greater than all the keys in the node’s left subtree and less than those in its right subtree. 
+Binary search trees allow binary search for fast lookup, addition and removal of elements.
+
+<p align="center">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Binary_search_tree.svg/1200px-Binary_search_tree.svg.png" width=350 height=300 alt="Binary Search Tree">
+</p>
+
+| Operation | Time Complexity | Space Complexity | Note |
+| :--: | :--: | :--: | :--: |
+| Index | O(log n) | O(log n)  | it can go up to O(n) time and space if BST degenerates to linked list |
+| Insert | O(log n)  | O(log n)  | it can go up to O(n) time and space if BST degenerates to linked list |
+| Delete | O(log n)  | O(log n)  | it can go up to O(n) time and space if BST degenerates to linked list|
+| Update | O(log n)  | O(log n)  | it can go up to O(n) time and space if BST degenerates to linked list |
+
+## 7. [Set](src/main/java/HashSet.java)
+
+**Set** is a data structure that can store unique values, without any particular order.
+
+| Operation | Time Complexity | Space Complexity | Note |
+| :--: | :--: | :--: | :--: |
+| Add | O(1) | O(1) | when resizing is required, this operation takes O(n) time and O(n) space |
+| Remove | O(1) | O(1) | - |
+| Contains | O(1) | O(1) | - |
+
+## 8. [Heap](src/main/java/Heap.java)
+
+
