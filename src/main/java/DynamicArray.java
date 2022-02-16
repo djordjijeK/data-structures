@@ -44,7 +44,7 @@ public class DynamicArray<T> implements Iterable<T>
             this.capacity = this.capacity == 0 ? 1 : this.capacity * 2;     // double the capacity
 
             T[] new_array = (T[]) new Object[this.capacity];
-            for (int i = 0; i < this.length; i++) 
+            for (int i = 0; i < this.length; i++)
                 new_array[i] = this.array[i];
 
             this.array = new_array;
@@ -249,14 +249,14 @@ public class DynamicArray<T> implements Iterable<T>
             return "[]";
         else
         {
-            var builder = new StringBuilder(this.length()).append("[");
+            StringBuilder builder = new StringBuilder(this.length()).append("[");
 
             for(int index = 0; index < this.length() - 1; index++)
             {
-                builder.append(this.array[index] + ",");
+                builder.append(this.array[index]).append(",");
             }
 
-            builder.append(this.array[this.length() - 1] + "]");
+            builder.append(this.array[this.length() - 1]).append("]");
             return builder.toString();
         }    
     }

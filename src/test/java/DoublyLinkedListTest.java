@@ -6,24 +6,20 @@ public class DoublyLinkedListTest
     @Test
     public void testDefaultConstructor()
     {
-        var linkedList = new DoublyLinkedList<>();
+        DoublyLinkedList<String> linkedList = new DoublyLinkedList<>();
 
         Assertions.assertTrue(linkedList.isEmpty());
         Assertions.assertEquals(0, linkedList.length());
         
-        Assertions.assertThrows(RuntimeException.class, () -> {
-            linkedList.peekFirst();
-        });
+        Assertions.assertThrows(RuntimeException.class, linkedList::peekFirst);
 
-        Assertions.assertThrows(RuntimeException.class, () -> {
-            linkedList.peekLast();
-        });
+        Assertions.assertThrows(RuntimeException.class, linkedList::peekLast);
     }
 
     @Test
     public void testAppend()
     {
-        var linkedList = new DoublyLinkedList<String>();
+        DoublyLinkedList<String> linkedList = new DoublyLinkedList<>();
 
         linkedList.append("Djordjije");
 
@@ -43,7 +39,7 @@ public class DoublyLinkedListTest
     @Test
     public void testPrepend()
     {
-        var linkedList = new DoublyLinkedList<Integer>();
+        DoublyLinkedList<Integer> linkedList = new DoublyLinkedList<>();
 
         linkedList.prepend(100);
 
@@ -63,7 +59,7 @@ public class DoublyLinkedListTest
     @Test
     public void testInsertAt()
     {
-        var linkedList = new DoublyLinkedList<Integer>();
+        DoublyLinkedList<Integer> linkedList = new DoublyLinkedList<>();
 
         Assertions.assertThrows(IndexOutOfBoundsException.class, () -> {
             linkedList.insertAt(1, 100);
@@ -98,11 +94,9 @@ public class DoublyLinkedListTest
     @Test
     public void testRemoveFirst()
     {
-        var linkedList = new DoublyLinkedList<Character>();
+        DoublyLinkedList<Character> linkedList = new DoublyLinkedList<>();
 
-        Assertions.assertThrows(RuntimeException.class, () -> {
-            linkedList.removeFirst();
-        });
+        Assertions.assertThrows(RuntimeException.class, linkedList::removeFirst);
 
         linkedList.append('A');
         linkedList.append('B');
@@ -124,13 +118,9 @@ public class DoublyLinkedListTest
 
         linkedList.removeFirst();
 
-        Assertions.assertThrows(RuntimeException.class, () -> {
-            linkedList.peekFirst();
-        });
+        Assertions.assertThrows(RuntimeException.class, linkedList::peekFirst);
 
-        Assertions.assertThrows(RuntimeException.class, () -> {
-            linkedList.peekLast();
-        });
+        Assertions.assertThrows(RuntimeException.class, linkedList::peekLast);
 
         Assertions.assertTrue(linkedList.isEmpty());
     }
@@ -138,11 +128,9 @@ public class DoublyLinkedListTest
     @Test
     public void testRemoveLast()
     {
-        var linkedList = new DoublyLinkedList<Character>();
+        DoublyLinkedList<Character> linkedList = new DoublyLinkedList<>();
 
-        Assertions.assertThrows(RuntimeException.class, () -> {
-            linkedList.removeFirst();
-        });
+        Assertions.assertThrows(RuntimeException.class, linkedList::removeFirst);
 
         linkedList.append('A');
         linkedList.append('B');
@@ -164,13 +152,9 @@ public class DoublyLinkedListTest
 
         linkedList.removeLast();
 
-        Assertions.assertThrows(RuntimeException.class, () -> {
-            linkedList.peekFirst();
-        });
+        Assertions.assertThrows(RuntimeException.class, linkedList::peekFirst);
 
-        Assertions.assertThrows(RuntimeException.class, () -> {
-            linkedList.peekLast();
-        });
+        Assertions.assertThrows(RuntimeException.class, linkedList::peekLast);
 
         Assertions.assertTrue(linkedList.isEmpty());
     }
@@ -178,7 +162,7 @@ public class DoublyLinkedListTest
     @Test
     public void testRemoveAt()
     {
-        var linkedList = new DoublyLinkedList<Character>();
+        DoublyLinkedList<Character> linkedList = new DoublyLinkedList<>();
 
         linkedList.append('A');
         linkedList.append('B');
@@ -216,7 +200,7 @@ public class DoublyLinkedListTest
     @Test
     public void testRemove()
     {
-        var linkedList = new DoublyLinkedList<Character>();
+        DoublyLinkedList<Character> linkedList = new DoublyLinkedList<>();
 
         linkedList.append('A');
         linkedList.append('B');
@@ -257,7 +241,7 @@ public class DoublyLinkedListTest
     @Test
     public void testIndexOfAndContains()
     {
-        var linkedList = new DoublyLinkedList<Character>();
+        DoublyLinkedList<Character> linkedList = new DoublyLinkedList<>();
 
         linkedList.append('A');
         linkedList.append('B');

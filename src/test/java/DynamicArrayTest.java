@@ -1,14 +1,12 @@
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
-import java.util.Iterator;
-
 public class DynamicArrayTest 
 {
     @Test
     public void testDefaultConstructor()
     {
-        var array = new DynamicArray<String>();
+        DynamicArray<String> array = new DynamicArray<>();
 
         Assertions.assertTrue(array.isEmpty());
         Assertions.assertEquals(0, array.length());
@@ -18,7 +16,7 @@ public class DynamicArrayTest
     @Test
     public void testConstructorPart1()
     {
-        var array = new DynamicArray<String>(10);
+        DynamicArray<String> array = new DynamicArray<>(10);
 
         Assertions.assertTrue(array.isEmpty());
         Assertions.assertEquals(0, array.length());
@@ -29,7 +27,7 @@ public class DynamicArrayTest
     public void testConstructorPart2()
     {
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            var array = new DynamicArray<Integer>(-10);
+            DynamicArray<Integer> array = new DynamicArray<>(-10);
             array.append(10);
         });
     }
@@ -37,10 +35,10 @@ public class DynamicArrayTest
     @Test
     public void testAppend()
     {
-        var array = new DynamicArray<Integer>();
+        DynamicArray<Integer> array = new DynamicArray<>();
         int[] data = {12, 27, -32, 47, 52};
 
-        for (var item : data) array.append(item);
+        for (Integer item : data) array.append(item);
 
         for (int index = 0; index < array.length(); index++)
         {
@@ -53,7 +51,7 @@ public class DynamicArrayTest
     @Test
     public void testAppendResize()
     {
-        var array = new DynamicArray<String>(2);
+        DynamicArray<String> array = new DynamicArray<>(2);
 
         Assertions.assertEquals(0, array.length());
         Assertions.assertEquals(2, array.capacity());
@@ -83,7 +81,7 @@ public class DynamicArrayTest
     @Test
     public void testGet()
     {
-        var array = new DynamicArray<String>();
+        DynamicArray<String> array = new DynamicArray<>();
         String[] data = {"ABC", "DEF", "GHI", "JKL"};
         
         for(String item : data) array.append(item);
@@ -102,7 +100,7 @@ public class DynamicArrayTest
     @Test
     public void testSet()
     {
-        var array = new DynamicArray<String>();
+        DynamicArray<String> array = new DynamicArray<>();
         String[] data = {"ABC", "DEF", "GHI", "JKL"};
         
         for(String item : data) array.append(item);
@@ -122,7 +120,7 @@ public class DynamicArrayTest
     @Test
     public void testClear()
     {
-        var array = new DynamicArray<String>();
+        DynamicArray<String> array = new DynamicArray<>();
         String[] data = {"ABC", "DEF", "GHI", "JKL"};
 
         for(String item : data) array.append(item);
@@ -131,14 +129,14 @@ public class DynamicArrayTest
 
         for (int index = 0; index < array.length(); index++)
         {
-            Assertions.assertEquals(null, array.get(index));
+            Assertions.assertNull(array.get(index));
         }
     }
 
     @Test
     public void testIndexOf()
     {
-        var array = new DynamicArray<String>();
+        DynamicArray<String> array = new DynamicArray<>();
         String[] data = {"ABC", "DEF", "GHI", "JKL"};
 
         for(String item : data) array.append(item);
@@ -151,12 +149,12 @@ public class DynamicArrayTest
     @Test
     public void testRemoteAt()
     {
-        var array = new DynamicArray<Integer>();
+        DynamicArray<Integer> array = new DynamicArray<>();
         int[] data = {10, -15, 20, -25, 35, 75, 55, -35};
 
         for(Integer item : data) array.append(item); 
 
-        var item = array.removeAt(0);
+        Integer item = array.removeAt(0);
 
         Assertions.assertEquals(10, item);
         Assertions.assertEquals(data.length - 1, array.length());
@@ -176,24 +174,24 @@ public class DynamicArrayTest
     @Test
     public void testRemove()
     {
-        var array = new DynamicArray<Integer>();
+        DynamicArray<Integer> array = new DynamicArray<>();
         int[] data = {10, -15, 20, -25, 35, 75, 55, -35};
 
         for(Integer item : data) array.append(item); 
 
-        var truth = array.remove(10);
+        boolean truth = array.remove(10);
 
-        Assertions.assertEquals(true, truth);
+        Assertions.assertTrue(truth);
         Assertions.assertEquals(data.length - 1, array.length());
 
         truth = array.remove(100);
 
-        Assertions.assertEquals(false, truth);
+        Assertions.assertFalse(truth);
         Assertions.assertEquals(data.length - 1, array.length());
 
         truth = array.remove(75);
 
-        Assertions.assertEquals(true, truth);
+        Assertions.assertTrue(truth);
         Assertions.assertEquals(data.length - 2, array.length());
         Assertions.assertEquals(data.length - 2, array.capacity());
     }
@@ -201,17 +199,15 @@ public class DynamicArrayTest
     @Test
     public void testIterator()
     {
-        var array = new DynamicArray<Integer>();
+        DynamicArray<Integer> array = new DynamicArray<>();
         int[] data = {10, -15, 20, -25, 35, 75, 55, -35};
 
         for(Integer item : data) array.append(item);
 
         int index = 0;
-        Iterator<Integer> iter = array.iterator();
 
-        while(iter.hasNext())
-        {
-            Assertions.assertEquals(iter.next(), data[index++]);
+        for (Integer integer : array) {
+            Assertions.assertEquals(integer, data[index++]);
         }
 
         Assertions.assertEquals(index, data.length);

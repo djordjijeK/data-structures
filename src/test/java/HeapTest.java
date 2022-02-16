@@ -88,7 +88,7 @@ public class HeapTest
         Assertions.assertTrue(heap.isMinHeap(0));
 
         heap.remove(7);
-        Assertions.assertEquals(null, heap.peek());
+        Assertions.assertNull(heap.peek());
         Assertions.assertTrue(heap.isMinHeap(0));
     }
 }

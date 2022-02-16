@@ -109,8 +109,8 @@ public class HashTableTest
 
         Assertions.assertEquals(11, hashTable.getCapacity());
         Assertions.assertEquals(3, hashTable.size());
-        Assertions.assertEquals(null, hashTable.get("Djordjije"));
-        Assertions.assertEquals(null, hashTable.get("Bogdan"));
+        Assertions.assertNull(hashTable.get("Djordjije"));
+        Assertions.assertNull(hashTable.get("Bogdan"));
     }
 
     @Test

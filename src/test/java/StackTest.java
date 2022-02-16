@@ -8,20 +8,16 @@ public class StackTest
     @Test
     public void testStackConstructor()
     {
-        var stack = new Stack<Integer>();
+        Stack<Integer> stack = new Stack<>();
 
         Assertions.assertTrue(stack.isEmpty());
         Assertions.assertEquals(0, stack.length());
         
-        Assertions.assertThrows(EmptyStackException.class, () -> {
-            stack.pop();
-        });
+        Assertions.assertThrows(EmptyStackException.class, stack::pop);
 
-        Assertions.assertThrows(EmptyStackException.class, () -> {
-            stack.peek();
-        });
+        Assertions.assertThrows(EmptyStackException.class, stack::peek);
 
-        var newStack = new Stack<Integer>(10);
+        Stack<Integer> newStack = new Stack<>(10);
 
         Assertions.assertFalse(newStack.isEmpty());
         Assertions.assertEquals(1, newStack.length());
@@ -31,7 +27,7 @@ public class StackTest
     @Test
     public void testStackPush()
     {
-        var stack = new Stack<Integer>();
+        Stack<Integer> stack = new Stack<>();
 
         stack.push(10);
         stack.push(20);
@@ -48,7 +44,7 @@ public class StackTest
     @Test
     public void testStackPop()
     {
-        var stack = new Stack<String>();
+        Stack<String> stack = new Stack<>();
 
         stack.push("Djordjije");
         stack.push("Bogdan");

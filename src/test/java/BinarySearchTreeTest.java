@@ -88,7 +88,7 @@ public class BinarySearchTreeTest
         Assertions.assertTrue(bst.delete(10));
         Assertions.assertFalse(bst.contains(10));
 
-        var root = bst.getRoot();
+        BinarySearchTree<Integer>.Node root = bst.getRoot();
 
         Assertions.assertEquals(12, root.key);
         Assertions.assertEquals(5, root.leftChild.key);
@@ -107,7 +107,7 @@ public class BinarySearchTreeTest
         root = bst.getRoot();
         Assertions.assertEquals(15, root.key);
         Assertions.assertEquals(7, root.leftChild.key);
-        Assertions.assertEquals(null, root.rightChild);
+        Assertions.assertNull(root.rightChild);
 
         bst.delete(7);
         bst.delete(15);
@@ -116,6 +116,6 @@ public class BinarySearchTreeTest
 
         root = bst.getRoot();
 
-        Assertions.assertEquals(null, root);
+        Assertions.assertNull(root);
     }
 }

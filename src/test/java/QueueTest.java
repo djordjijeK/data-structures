@@ -6,20 +6,16 @@ public class QueueTest
     @Test
     public void testQueueConstructor()
     {
-        var queue = new Queue<Integer>();
+        Queue<Integer> queue = new Queue<>();
 
         Assertions.assertTrue(queue.isEmpty());
         Assertions.assertEquals(0, queue.length());
         
-        Assertions.assertThrows(RuntimeException.class, () -> {
-            queue.poll();
-        });
+        Assertions.assertThrows(RuntimeException.class, queue::poll);
 
-        Assertions.assertThrows(RuntimeException.class, () -> {
-            queue.peek();
-        });
+        Assertions.assertThrows(RuntimeException.class, queue::peek);
 
-        var newQueue = new Queue<Integer>(10);
+        Queue<Integer> newQueue = new Queue<>(10);
 
         Assertions.assertFalse(newQueue.isEmpty());
         Assertions.assertEquals(1, newQueue.length());
@@ -29,7 +25,7 @@ public class QueueTest
     @Test
     public void testEnqueue()
     {
-        var queue = new Queue<Integer>();
+        Queue<Integer> queue = new Queue<>();
 
         queue.enqueue(10);
         queue.offer(20);
@@ -46,7 +42,7 @@ public class QueueTest
     @Test
     public void testPoll()
     {
-        var queue = new Queue<String>();
+        Queue<String> queue = new Queue<>();
 
         queue.offer("Djordjije");
         queue.offer("Bogdan");
