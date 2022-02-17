@@ -10,38 +10,42 @@ public class ListInterface {
 
     public static void main(String[] args) {
 
-        // temporary list
-        List<Integer> temporaryList = Arrays.asList(7, 5, 6);
+        // initial list
+        List<Integer> initialList = Arrays.asList(7, 5, 6);
 
         // ArrayList implements List
         ArrayList<Integer> arrayList = new ArrayList<>(10); // initial capacity
 
         // inserting elements
-        arrayList.add(1);                       // [1]
-        arrayList.addAll(temporaryList);        // [1, 7, 5, 6]
-        arrayList.add(1, 2);      // [1, 2, 7, 5, 6] - element shifting
+        arrayList.add(1);
+        arrayList.addAll(initialList);
+        arrayList.add(1, 2);
+
+        System.out.println("ArrayList (1): " + arrayList);
 
         // updating elements
-        arrayList.set(0, 10);                   // [10, 2, 7, 5, 6]
+        arrayList.set(0, 10);
+        assert(arrayList.get(0) == 10);
 
         // searching elements
-        Integer x = arrayList.get(3);           // 5
-        arrayList.indexOf(5);                   // 3
-        arrayList.contains(100);                // false
+        assert(arrayList.indexOf(5) == 3);
+        assert(!arrayList.contains(100));
 
         // deleting elements
-        arrayList.remove((Integer) 5);          // [10, 2, 7, 6]
-        arrayList.remove(0);              // [2, 7, 6]
+        arrayList.remove((Integer) 5);
+        arrayList.remove(0);
+
+        System.out.println("ArrayList (2): " + arrayList);
 
         // traversing list elements
-        arrayList.forEach(number -> System.out.print(number + " "));
+        arrayList.forEach(number -> System.out.print(number + " | "));
         System.out.println();
         for (Integer number : arrayList) {
-            System.out.print(number + " ");
+            System.out.print(number + " | ");
         }
         System.out.println();
         for (int index = 0; index < arrayList.size(); index++) {
-            System.out.print(arrayList.get(index) + " ");
+            System.out.print(arrayList.get(index) + " | ");
         }
         System.out.println();
 
@@ -51,13 +55,13 @@ public class ListInterface {
         linkedList.add("Second");
         linkedList.addLast("Last");
 
-        System.out.println("Linked List: " + linkedList);  // ["First", "Second", "Third"]
+        System.out.println("Linked List (1): " + linkedList);
 
-        linkedList.removeFirst();                          // ["Second", "Last"]
-        linkedList.removeLast();                           // ["Second"]
+        assert(linkedList.removeFirst().equals("First"));
+        assert(linkedList.removeLast().equals("Last"));
 
         linkedList.set(0, "Updated Second");
-        System.out.println("Linked List: " + linkedList);  // ["Updated Second"]
+        System.out.println("Linked List (2): " + linkedList);
 
         // Stack implements List
         Stack<String> stack = new Stack<>();
@@ -65,12 +69,13 @@ public class ListInterface {
         stack.push("Second");
         stack.push("First");
 
-        System.out.println("Stack: " + stack);              // ["Third", "Second", "First"]
+        System.out.println("Stack (1): " + stack);
 
-        stack.pop();                                        // ["Second", "Third"]
-        System.out.println("Peeking: " + stack.peek());
         stack.pop();
-        System.out.println(stack);                          // ["Third"]
+        assert(stack.peek().equals("Second"));
+        stack.pop();
+
+        System.out.println("Stack (2): " + stack);
     }
 
 }

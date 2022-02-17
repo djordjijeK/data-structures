@@ -44,7 +44,7 @@ Unlike arrays, the elements in the linked list are not stored in the contiguous 
 
 ## [3. Stack](src/main/java/Stack.java)
 
-**Stack** is a last in, first out (**LIFO**) data structure. The element that was added last will be the one to be removed first. 
+**Stack** is a last in, first out (*LIFO*) data structure. The element that was added last will be the one to be removed first. 
 
 <p align="center">
   <img src="https://cdn.programiz.com/sites/tutorial2program/files/stack.png" alt="Stack"/>
@@ -59,7 +59,7 @@ Unlike arrays, the elements in the linked list are not stored in the contiguous 
 ## [4. Queue](src/main/java/Queue.java)
 
 **Queue** is a collection of entities that are maintained in a sequence and can be modified by the addition of entities at one end of the sequence (tail, rear) and the removal of entities from the other end of the sequence (head).
-It maintains the the first in, first out (**FIFO**) policy.
+It maintains the first in, first out (*FIFO*) policy.
 
 <p align="center">
   <img src="https://cdn.programiz.com/sites/tutorial2program/files/queue.png" alt="Queue">
@@ -93,7 +93,7 @@ Such collisions are typically handled using some of the collision resolution pro
 
 ## [6. Binary Search Tree](src/main/java/BinarySearchTree.java)
 
-**Binary Search Tree (BST)** is a rooted binary tree data structure whose internal nodes each store a key greater than all the keys in the node’s left subtree and less than those in its right subtree. 
+**Binary Search Tree (BST)** is a rooted binary tree data structure whose internal nodes store a key greater than all the keys in the node’s left subtree and less than those in its right subtree. 
 Binary search trees allow binary search for fast lookup, addition and removal of elements.
 
 <p align="center">
@@ -121,7 +121,7 @@ Binary search trees allow binary search for fast lookup, addition and removal of
 
 **Heap** is a specialized tree-based data structure which is essentially an almost complete tree that satisfies the heap property.
 In a max heap, for any given node `C`, if `P` is a parent node of `C`, then the key (the value) of `P` is greater than or equal to the key of `C`.
-In a min heap, the key of P is less than or equal to the key of `C`.
+In a min heap, the key of `P` is less than or equal to the key of `C`.
 The node at the top contains either the min or the max value of the heap and is called the root node.
 
 <p align="center">
@@ -220,4 +220,25 @@ The most important implementation of this interface is:
 
  - `java.util.ArrayDeque` - implements `java.util.Deque`
 
-## B. Map Interface
+## [B. Map Interface](src/main/java/collections/MapInterface.java)
+
+A map associates items to keys (a.k.a `key` - `value` pairs), allowing us to retrieve items by those keys.
+
+```java
+  public interface Map<K, V>
+```
+
+The most important implementations of this interface are:
+
+- `java.util.HashMap` - implements `java.util.Map`
+
+  - Does not maintain any order
+  - It is used when it is required to use key-value pairs and when the order of elements inside the map does not matter
+
+- `java.util.LinkedHashSet` - implements `java.util.Set` using hash map and linked list
+
+  - Maintains insertion order of elements
+
+- `java.util.TreeSet` - implements `java.util.Set` using tree map
+
+  - Maintains inserted elements in the sorted order

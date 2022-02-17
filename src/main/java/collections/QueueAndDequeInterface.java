@@ -1,5 +1,6 @@
 package collections;
 
+import java.util.Objects;
 import java.util.Queue;
 import java.util.LinkedList;
 import java.util.ArrayDeque;
@@ -19,8 +20,8 @@ public class QueueAndDequeInterface {
         System.out.println("Queue (1): " + queue);
 
         // remove element from the queue
-        System.out.println("Polling: " + queue.poll());
-        System.out.println("Removing: " + queue.remove());
+        assert(Objects.equals(queue.poll(), new Product("Table", 100)));
+        assert(Objects.equals(queue.remove(), new Product("TV", 450)));
         System.out.println("Queue (2): " + queue);
 
         // Deque (as Stack) implements Queue implements Collection

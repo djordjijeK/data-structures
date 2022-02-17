@@ -5,30 +5,30 @@ import java.util.Objects;
 public class Product implements Comparable<Product> {
 
     private final String name;
-    private final Integer age;
+    private final Integer price;
 
-    public Product(String name, Integer age) {
+    public Product(String name, Integer price) {
         this.name = name;
-        this.age = age;
+        this.price = price;
     }
 
     public String getName() {
         return name;
     }
 
-    public Integer getAge() {
-        return age;
+    public Integer getPrice() {
+        return price;
     }
 
     @Override
     public String toString() {
-        return "Product(" + "name: " + this.name + ", age: " + this.age + ")";
+        return "Product(" + "name: " + this.name + ", age: " + this.price + ")";
     }
 
     @Override
     public int compareTo(Product other) {
         int comparison = this.getName().compareTo(other.getName());
-        return comparison != 0 ? comparison : this.getAge().compareTo(other.getAge());
+        return comparison != 0 ? comparison : this.getPrice().compareTo(other.getPrice());
     }
 
     @Override
@@ -42,11 +42,11 @@ public class Product implements Comparable<Product> {
 
         Product product = (Product) other;
 
-        return this.getName().equals(product.getName()) && this.getAge().equals(product.getAge());
+        return this.getName().equals(product.getName()) && this.getPrice().equals(product.getPrice());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.getName(), this.getAge());
+        return Objects.hash(this.getName(), this.getPrice());
     }
 }

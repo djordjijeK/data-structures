@@ -559,8 +559,8 @@ public class HashTable<K, V> implements Iterable<K>
     /**
      * Finds the greatest common denominator of x and y.
      * 
-     * @param x    - a number.
-     * @param y    - a number.
+     * @param a    - a number.
+     * @param b    - a number.
      * @return int - gcd between x and y. 
      */
     private static final int gcd(int a, int b) 
